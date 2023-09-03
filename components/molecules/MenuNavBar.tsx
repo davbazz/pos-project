@@ -35,7 +35,9 @@ export default function MenuNavBar({
   return (
     <Flex className="justify-center items-center gap-6">
       {menuCategories?.map((cat) => (
-        <Button onClick={() => setChosenMenuCategory(cat)}>{cat}</Button>
+        <Button key={cat} onClick={() => setChosenMenuCategory(cat)}>
+          {cat}
+        </Button>
       ))}
     </Flex>
   );
