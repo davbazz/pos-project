@@ -1,0 +1,18 @@
+import Link from "next/link";
+
+interface LinkButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
+  href: string;
+  children: string;
+}
+
+export default function LinkButton({
+  href,
+  children,
+  ...props
+}: LinkButtonProps) {
+  return (
+    <Link href={href} {...props}>
+      {children}
+    </Link>
+  );
+}
