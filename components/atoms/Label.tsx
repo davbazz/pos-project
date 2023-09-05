@@ -1,6 +1,17 @@
 interface LabelProps extends React.HTMLAttributes<HTMLLabelElement> {
   children: React.ReactNode;
-  htmlFor: "email" | "password";
+  htmlFor:
+    | "email"
+    | "password"
+    | "name"
+    | "category"
+    | "description"
+    | "price"
+    | "size"
+    | "img_url"
+    | "ingredients"
+    | "available"
+    | "pathname";
 }
 
 export default function Label({ children, ...props }: LabelProps) {

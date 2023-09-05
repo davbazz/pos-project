@@ -1,45 +1,31 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import getFirstCategory from "@/lib/getFirstCategory";
 import MenuNavBar from "@/components/molecules/MenuNavBar";
 import ProductList from "@/components/molecules/ProductList";
 import RedirectToMenu from "@/components/molecules/RedirectToMenu";
 import Flex from "@/components/atoms/Flex";
+import MainHeader from "@/components/atoms/MainHeader";
 
 export default function Homepage() {
   const [chosenMenuCategory, setChosenMenuCategory] = useState<string | null>(
     null
   );
-  const [redirectToMenu, setRedirectToMenu] = useState<boolean>(false);
-  const supabase = createClientComponentClient();
-
-  const getFirstCategory = async () => {
-    let { data, error } = await supabase
-      .from("menu_categories")
-      .select("name")
-      .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
-      .order("listing_order", { ascending: true })
-      .range(0, 0);
-
-    if (!error && data!.length > 0) {
-      setChosenMenuCategory(() => data![0].name);
-    } else {
-      setRedirectToMenu(true);
-    }
-  };
+  const [noCategoryMessase, setNoCategoryMessage] = useState<boolean>(false);
 
   useEffect(() => {
-    getFirstCategory();
+    getFirstCategory({ setChosenMenuCategory, setNoCategoryMessage });
   }, []);
 
   return (
     <main>
-      {redirectToMenu ? (
+      {noCategoryMessase ? (
         <RedirectToMenu />
       ) : (
         <Flex className="flex-col">
           <MenuNavBar setChosenMenuCategory={setChosenMenuCategory} />
+          <MainHeader>{chosenMenuCategory}</MainHeader>
           <ProductList chosenMenuCategory={chosenMenuCategory} />
         </Flex>
       )}

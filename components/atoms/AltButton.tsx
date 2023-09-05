@@ -1,5 +1,5 @@
 interface AltButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: string | number;
   onClick?: (e: any) => any;
 }
 

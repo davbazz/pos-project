@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { usePathname } from "next/navigation";
+import getAllMenuCategories from "@/lib/getAllMenuCategories";
 import Flex from "../atoms/Flex";
-import Button from "../atoms/MainButton";
+import MainButton from "../atoms/MainButton";
 
 export default function MenuNavBar({
   setChosenMenuCategory,
@@ -11,34 +12,21 @@ export default function MenuNavBar({
   setChosenMenuCategory: (chosenMenuCategory: string) => void;
 }) {
   const [menuCategories, setMenuCategories] = useState<string[]>([]);
-  const supabase = createClientComponentClient();
-
-  const getAllMenuCategories = async () => {
-    const { data, error } = await supabase
-      .from("menu_categories")
-      .select("name")
-      .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
-      .order("listing_order", { ascending: true });
-
-    if (!error) {
-      setMenuCategories(data!.map((cat) => cat.name));
-    } else {
-      console.log(data);
-      console.log(error.message);
-    }
-  };
+  const pathname = usePathname();
 
   useEffect(() => {
-    getAllMenuCategories();
+    getAllMenuCategories({ setMenuCategories });
   }, []);
 
   return (
     <Flex className="justify-center items-center gap-6">
-      {menuCategories?.map((cat) => (
-        <Button key={cat} onClick={() => setChosenMenuCategory(cat)}>
-          {cat}
-        </Button>
-      ))}
+      {menuCategories.length > 0 &&
+        menuCategories.map((cat) => (
+          <MainButton key={cat} onClick={() => setChosenMenuCategory(cat)}>
+            {cat}
+          </MainButton>
+        ))}
+      {pathname === "/menu" && <MainButton>Add New</MainButton>}
     </Flex>
   );
 }
