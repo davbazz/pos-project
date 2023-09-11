@@ -8,16 +8,7 @@ import SubText from "../atoms/SubText";
 import MainButton from "../atoms/MainButton";
 import Quantifier from "../atoms/Quantifier";
 
-interface ProductProps {
-  name: string;
-  description: string;
-  price: string[];
-  size: string[];
-  img_url: string;
-  ingredients?: string[];
-  available?: boolean;
-  pathname?: string;
-}
+import type { ProductType } from "@/types/ProductType";
 
 export default function Product({
   name,
@@ -27,8 +18,7 @@ export default function Product({
   img_url,
   ingredients,
   available,
-  pathname,
-}: ProductProps) {
+}: ProductType) {
   const [selectedSize, setSelectedSize] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
 

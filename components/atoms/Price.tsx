@@ -1,5 +1,5 @@
 interface PriceType extends React.HTMLProps<HTMLParagraphElement> {
-  children: string[] | string;
+  children: number | string;
 }
 
 export default function Price({ children, ...props }: PriceType) {

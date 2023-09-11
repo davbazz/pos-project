@@ -1,18 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import fetchProducts from "@/lib/fetchProducts";
 import Flex from "../atoms/Flex";
-import Product from "./Product";
+import Product from "../molecules/MenuProduct";
+
+interface ProductListProps {
+  chosenMenuCategory: string | null;
+  productList: any[] | null;
+  setProductList: (products: [] | null) => void;
+}
 
 export default function ProductList({
   chosenMenuCategory,
-}: {
-  chosenMenuCategory: string | null;
-}) {
-  const [productList, setProductList] = useState<any[] | null>(null);
-
+  productList,
+  setProductList,
+}: ProductListProps) {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -25,7 +29,6 @@ export default function ProductList({
         <Flex className="gap-4">
           {productList?.map((product) => (
             <Product
-              key={product.listing_order}
               name={product.product_name}
               description={product.description}
               price={product.price}
@@ -41,7 +44,6 @@ export default function ProductList({
         <Flex className="gap-4">
           {productList?.map((product) => (
             <Product
-              key={product.listing_order}
               name={product.product_name}
               description={product.description}
               price={product.price}

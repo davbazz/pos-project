@@ -1,12 +1,10 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { supabase } from "./clientSupabase";
 
 export default async function getAllMenuCategories({
   setMenuCategories,
 }: {
   setMenuCategories: (categories: string[]) => void;
 }) {
-  const supabase = createClientComponentClient();
-
   const { data, error } = await supabase
     .from("menu_categories")
     .select("name")

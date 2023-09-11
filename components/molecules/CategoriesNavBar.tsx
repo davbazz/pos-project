@@ -6,10 +6,10 @@ import getAllMenuCategories from "@/lib/getAllMenuCategories";
 import Flex from "../atoms/Flex";
 import MainButton from "../atoms/MainButton";
 
-export default function MenuNavBar({
-  setChosenMenuCategory,
+export default function HomeNavBar({
+  setSelectedCategory,
 }: {
-  setChosenMenuCategory: (chosenMenuCategory: string) => void;
+  setSelectedCategory: (selectedCategory: string) => void;
 }) {
   const [menuCategories, setMenuCategories] = useState<string[]>([]);
   const pathname = usePathname();
@@ -21,8 +21,8 @@ export default function MenuNavBar({
   return (
     <Flex className="justify-center items-center gap-6">
       {menuCategories.length > 0 &&
-        menuCategories.map((cat) => (
-          <MainButton key={cat} onClick={() => setChosenMenuCategory(cat)}>
+        menuCategories.map((cat, i) => (
+          <MainButton key={i} onClick={() => setSelectedCategory(cat)}>
             {cat}
           </MainButton>
         ))}

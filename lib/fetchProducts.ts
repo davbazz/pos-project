@@ -1,35 +1,38 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { supabase } from "./clientSupabase";
 
 interface fetchProductsProps {
-  chosenMenuCategory: string | null;
+  selectedCategory: string | null;
   setProductList: (products: any) => void;
-  pathname: string;
+  setNoProducts: (product: boolean) => void;
+  setErrorMessage: (error: string | null) => void;
 }
 
 export default async function fetchProducts({
-  chosenMenuCategory,
+  selectedCategory,
   setProductList,
-  pathname,
+  setNoProducts,
+  setErrorMessage,
 }: fetchProductsProps) {
-  const supabase = createClientComponentClient();
-
-  const homeData =
-    "product_name, price, description, size, img_url, listing_order";
-
-  const menuData =
-    "category_name, product_name, description, size, price, ingredients, available, img_url, listing_order";
-
   const { data: products, error } = await supabase
     .from("menu_products")
-    .select(pathname === "/home" ? homeData : menuData)
+    .select(
+      "id, product_name, category_name, price, description, size, img_url, listing_order"
+    )
     .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
-    .eq("category_name", chosenMenuCategory)
+    .eq("category_name", selectedCategory)
     .eq("available", true)
     .order("listing_order", { ascending: true });
 
   if (!error) {
-    return setProductList(products);
+    setErrorMessage(null);
+    console.log(products);
+
+    if (products.length > 0) {
+      return setNoProducts(false), setProductList(products);
+    } else {
+      return setProductList(null), setNoProducts(true);
+    }
   } else {
-    return console.log(error.message);
+    return setErrorMessage(error.message);
   }
 }
