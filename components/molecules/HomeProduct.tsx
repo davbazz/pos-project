@@ -47,7 +47,7 @@ export default function HomeProduct({
       price: price[selectedSize] * quantity,
     };
 
-    setCart((prevCart: CartType) => {
+    setCart((prevCart: CartType | null) => {
       if (prevCart === null) {
         return [newProd];
       }
