@@ -15,12 +15,12 @@ export default function OrderOptions({
   setSelectedOption,
 }: OrderOptionsType) {
   useEffect(() => {
-    fetchOrderOptions({ setOptions });
+    fetchOrderOptions({ setOptions, setSelectedOption });
   }, []);
 
   return (
     <Flex className="justify-between">
-      {options?.map((option, i) => (
+      {options?.map((option) => (
         <AltButton onClick={() => setSelectedOption(option)}>
           {option}
         </AltButton>

@@ -2,8 +2,10 @@ import { supabase } from "./clientSupabase";
 
 export default async function fetchOrderOptions({
   setOptions,
+  setSelectedOption,
 }: {
   setOptions: (option: string[]) => void;
+  setSelectedOption: (option: string) => void;
 }) {
   const { data: options, error } = await supabase
     .from("order_options")
@@ -12,5 +14,6 @@ export default async function fetchOrderOptions({
 
   if (!error && options.length > 0) {
     setOptions(options[0].options);
+    setSelectedOption(options[0].options[0]);
   }
 }

@@ -13,7 +13,7 @@ export default function CartProduct({ prod }: { prod: CartItemType }) {
   const [quantity, setQuantity] = useState<number>(prod.quantity);
 
   const { cart, setCart } = useContext(CartContext) as {
-    cart: CartType | null;
+    cart: CartType;
     setCart: (newCart: any) => void;
   };
 
@@ -24,7 +24,7 @@ export default function CartProduct({ prod }: { prod: CartItemType }) {
         (i) => i.product_id === prod.product_id
       );
       updatedCart[index].quantity = quantity;
-      updatedCart[index].price = prod.price * quantity;
+      updatedCart[index].total_price = prod.price * quantity;
       setCart(updatedCart);
     } else {
       console.log("Error: couldn't update the cart");
@@ -66,7 +66,7 @@ export default function CartProduct({ prod }: { prod: CartItemType }) {
         <SubText>{prod.size}</SubText>
         <Flex className="">
           <Quantifier quantity={quantity} setQuantity={setQuantity} />
-          <Price>17,95 $</Price>
+          <Price>{`${prod.total_price} $`}</Price>
         </Flex>
       </Flex>
     </Flex>

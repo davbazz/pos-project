@@ -7,9 +7,8 @@ import Flex from "../atoms/Flex";
 import CartProduct from "./CartProduct";
 
 export default function CartProductList() {
-  const { cart, setCart } = useContext(CartContext) as {
-    cart: CartType | null;
-    setCart: (newCart: any) => void;
+  const { cart } = useContext(CartContext) as {
+    cart: CartType;
   };
 
   return (

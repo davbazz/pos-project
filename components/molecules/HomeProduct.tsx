@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { CartContext } from "@/components/providers/CartProvider";
 import type { CartType, CartItemType } from "@/types/CartType";
 import AltButton from "../atoms/AltButton";
@@ -44,7 +44,8 @@ export default function HomeProduct({
       category,
       name,
       size: size[selectedSize],
-      price: price[selectedSize] * quantity,
+      price: price[selectedSize],
+      total_price: price[selectedSize] * quantity,
     };
 
     setCart((prevCart: CartType | null) => {
@@ -60,6 +61,10 @@ export default function HomeProduct({
   const display = () => {
     console.log(cart);
   };
+
+  useEffect(() => {
+    setQuantity(1);
+  }, [category]);
 
   return (
     <Flex className="">

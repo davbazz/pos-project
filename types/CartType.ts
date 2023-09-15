@@ -5,6 +5,7 @@ export type CartItemType = {
   size: string;
   quantity: number;
   price: number;
+  total_price: number;
 };
 
 export type CartType = CartItemType[];
