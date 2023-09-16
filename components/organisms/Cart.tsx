@@ -111,22 +111,28 @@ export default function Cart() {
   }, []);
 
   return (
-    <Flex className="flex-col gap-4">
-      <Flex className="justify-between">
-        <MainHeader>Cart</MainHeader>
-        <MiniHeader>{`#${orderId}`}</MiniHeader>
-      </Flex>
-      <OrderOptions
-        options={options}
-        setOptions={setOptions}
-        setSelectedOption={setSelectedOption}
-      />
-      <CartProductList />
-      <Flex className="justify-between">
-        <SubText>Total</SubText>
-        <Price>17,95 $</Price>
-      </Flex>
-      <MainButton onClick={placeOrder}>Place an order</MainButton>
+    <Flex className="">
+      {cart === null || cart.length === 0 ? (
+        <SubText>Cart is empty</SubText>
+      ) : (
+        <Flex className="flex-col gap-4">
+          <Flex className="justify-between">
+            <MainHeader>Cart</MainHeader>
+            <MiniHeader>{`#${orderId}`}</MiniHeader>
+          </Flex>
+          <OrderOptions
+            options={options}
+            setOptions={setOptions}
+            setSelectedOption={setSelectedOption}
+          />
+          <CartProductList />
+          <Flex className="justify-between">
+            <SubText>Total</SubText>
+            <Price>{`${totalPrice}£`}</Price>
+          </Flex>
+          <MainButton onClick={placeOrder}>Place an order</MainButton>
+        </Flex>
+      )}
     </Flex>
   );
 }

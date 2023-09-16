@@ -2,34 +2,36 @@
 
 import { useState, useEffect } from "react";
 import getFirstCategory from "@/lib/selectInitialCategory";
-import MenuNavBar from "@/components/molecules/CategoriesNavBar";
+import MenuCategoriesNavBar from "@/components/molecules/MenuCategoriesNavBar";
 import ProductList from "@/components/organisms/HomeProductList";
 import Flex from "@/components/atoms/Flex";
 import MainHeader from "@/components/atoms/MainHeader";
 import MenuProductWorkshop from "@/components/organisms/MenuProductWorkshop";
 
 export default function Menu() {
-  const [chosenMenuCategory, setChosenMenuCategory] = useState<string | null>(
-    null
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [productList, setProductList] = useState<any[] | null>(null);
-  const [noCategoryMessase, setNoCategoryMessage] = useState<boolean>(false);
+  const [noCategory, setNoCategory] = useState<boolean>(false);
 
   useEffect(() => {
-    getFirstCategory({ setChosenMenuCategory, setNoCategoryMessage });
+    getFirstCategory({ setSelectedCategory, setNoCategory });
   }, []);
 
   return (
     <main>
       <Flex className="flex-col">
-        <MenuNavBar setChosenMenuCategory={setChosenMenuCategory} />
-        <MainHeader>{chosenMenuCategory}</MainHeader>
-        <ProductList
-          chosenMenuCategory={chosenMenuCategory}
+        <MenuCategoriesNavBar
+          setSelectedCategory={setSelectedCategory}
+          noCategory={noCategory}
+          setNoCategory={setNoCategory}
+        />
+        <MainHeader>{selectedCategory}</MainHeader>
+        {/* <ProductList
+          selectedCategory={selectedCategory}
           productList={productList}
           setProductList={setProductList}
-        />
-        <MenuProductWorkshop />
+        /> */}
+        {/* <MenuProductWorkshop /> */}
       </Flex>
     </main>
   );

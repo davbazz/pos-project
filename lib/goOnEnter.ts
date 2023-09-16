@@ -1,4 +1,4 @@
-export default function GoOnEnter(
+export default function goOnEnter(
   event: React.KeyboardEvent<HTMLInputElement>,
   func: () => void
 ) {

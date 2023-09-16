@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import OrderProvider from "@/components/providers/OrderProvider";
 import CartProvider from "@/components/providers/CartProvider";
 import selectInitialCategory from "@/lib/selectInitialCategory";
-import CategoriesNavBar from "@/components/molecules/CategoriesNavBar";
+import HomeCategoriesNavBar from "@/components/molecules/HomeCategoriesNavBar";
 import HomeProductList from "@/components/organisms/HomeProductList";
 import RedirectToMenu from "@/components/molecules/RedirectToMenu";
 import Flex from "@/components/atoms/Flex";
@@ -28,7 +28,7 @@ export default function Homepage() {
             <RedirectToMenu />
           ) : (
             <Flex className="flex-col">
-              <CategoriesNavBar setSelectedCategory={setSelectedCategory} />
+              <HomeCategoriesNavBar setSelectedCategory={setSelectedCategory} />
               <MainHeader>{selectedCategory}</MainHeader>
               <HomeProductList selectedCategory={selectedCategory} />
               <Cart />

@@ -1,8 +1,8 @@
 import { supabase } from "./clientSupabase";
 
 interface selectInitialCategoryProps {
-  setSelectedCategory: (category: string | null) => void;
-  setNoCategory?: (redirectToMenu: boolean) => void;
+  setSelectedCategory: (category: string) => void;
+  setNoCategory: (redirectToMenu: boolean) => void;
 }
 
 export default async function getFirstCategory({
@@ -17,8 +17,7 @@ export default async function getFirstCategory({
     .range(0, 0);
 
   if (!error && category!.length > 0) {
-    console.log(category);
-    return setSelectedCategory(category![0].name);
+    return setNoCategory(false), setSelectedCategory(category![0].name);
   } else {
     return setNoCategory!(true);
   }
