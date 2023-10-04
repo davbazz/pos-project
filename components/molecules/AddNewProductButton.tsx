@@ -23,7 +23,7 @@ export default function AddNewProductButton() {
       price: [0],
       size: [""],
       img_url: "",
-      ingredients: [],
+      ingredients: "",
       available: true,
     };
     setProductWorkshop(newProd);
