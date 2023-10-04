@@ -24,7 +24,7 @@ export default function HomeProduct({
   const [quantity, setQuantity] = useState<number>(1);
 
   const { cart, setCart } = useContext(CartContext) as {
-    cart: CartType | null;
+    cart: CartType;
     setCart: (newCart: any) => void;
   };
 
@@ -62,10 +62,7 @@ export default function HomeProduct({
       <Flex className="flex-col gap-2">
         <Flex className="justify-between">
           <Flex className="">
-            <ProductImg
-              src={`https://gpyiizwtvjlrtoqrsvcl.supabase.co/storage/v1/object/sign/product_img/latte.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwcm9kdWN0X2ltZy9sYXR0ZS5qcGVnIiwiaWF0IjoxNjkzNzI2Njk4LCJleHAiOjE3MjUyNjI2OTh9.W6oCAKZ1QGU2FM6cKHZwqJnidS0Xj5Nmilr9qVp_3pE&t=2023-09-03T07%3A38%3A18.337Z`}
-              alt={product_name}
-            />
+            <ProductImg src={img_url} alt={product_name} />
           </Flex>
           <Flex className="flex-col">
             <Flex className="justify-between">
