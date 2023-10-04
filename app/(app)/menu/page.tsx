@@ -1,38 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import getFirstCategory from "@/lib/selectInitialCategory";
+import { useEffect, useContext } from "react";
+import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
+import ProductWorkshopProvider from "@/components/providers/ProductWorkshopProvider";
+import MenuProductListProvider from "@/components/providers/MenuProductListProvider";
+import selectInitialCategory from "@/lib/selectInitialCategory";
 import MenuCategoriesNavBar from "@/components/molecules/MenuCategoriesNavBar";
-import ProductList from "@/components/organisms/HomeProductList";
+import MenuProductList from "@/components/organisms/MenuProductList";
 import Flex from "@/components/atoms/Flex";
 import MainHeader from "@/components/atoms/MainHeader";
 import MenuProductWorkshop from "@/components/organisms/MenuProductWorkshop";
+import AddNewProductButton from "@/components/molecules/AddNewProductButton";
 
 export default function Menu() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [productList, setProductList] = useState<any[] | null>(null);
-  const [noCategory, setNoCategory] = useState<boolean>(false);
+  const { selectedCategory, setSelectedCategory } = useContext(
+    SelectedCategoryContext
+  ) as {
+    selectedCategory: string;
+    setSelectedCategory: (newCategory: string) => void;
+  };
 
   useEffect(() => {
-    getFirstCategory({ setSelectedCategory, setNoCategory });
+    selectInitialCategory({ setSelectedCategory });
   }, []);
 
   return (
-    <main>
-      <Flex className="flex-col">
-        <MenuCategoriesNavBar
-          setSelectedCategory={setSelectedCategory}
-          noCategory={noCategory}
-          setNoCategory={setNoCategory}
-        />
-        <MainHeader>{selectedCategory}</MainHeader>
-        {/* <ProductList
-          selectedCategory={selectedCategory}
-          productList={productList}
-          setProductList={setProductList}
-        /> */}
-        {/* <MenuProductWorkshop /> */}
-      </Flex>
-    </main>
+    <ProductWorkshopProvider>
+      <MenuProductListProvider>
+        <main>
+          <Flex className="flex-col">
+            <MenuCategoriesNavBar />
+            <Flex className="justify-between">
+              <MainHeader>{selectedCategory}</MainHeader>
+              {selectedCategory && <AddNewProductButton />}
+            </Flex>
+            <MenuProductList />
+            <MenuProductWorkshop />
+          </Flex>
+        </main>
+      </MenuProductListProvider>
+    </ProductWorkshopProvider>
   );
 }

@@ -25,3 +25,30 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+/* In your CSS or stylesheets */
+
+/* Style for the labels */
+.label-container {
+  position: relative;
+}
+
+.label-container label {
+  position: absolute;
+  left: 10px; /* Adjust the left position as needed */
+  top: -10px; /* Move the label above the input */
+  background-color: white;
+  padding: 0 5px;
+  font-size: 12px; /* Adjust the font size as needed */
+}
+
+/* Style for the inputs */
+.input-container {
+  position: relative;
+}
+
+.input-container input {
+  padding: 10px; /* Add padding to make space for the label */
+  border: 1px solid #ccc; /* Add a border for the input */
+  border-radius: 4px; /* Add border-radius for rounded corners */
+}

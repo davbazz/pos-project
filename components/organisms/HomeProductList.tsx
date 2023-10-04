@@ -1,24 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
 import type { ProductType } from "@/types/ProductType";
-import fetchProducts from "@/lib/fetchProducts";
+import fetchHomeProducts from "@/lib/fetchHomeProducts";
 import Flex from "../atoms/Flex";
 import HomeProduct from "../molecules/HomeProduct";
 import SubText from "../atoms/SubText";
 import AltButton from "../atoms/AltButton";
+import RedirectToMenu from "../molecules/RedirectToMenu";
 
-type ProductListType = {
-  selectedCategory: string | null;
-};
-
-export default function ProductList({ selectedCategory }: ProductListType) {
+export default function HomeProductList() {
   const [productList, setProductList] = useState<ProductType[] | null>(null);
   const [noProducts, setNoProducts] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const { selectedCategory } = useContext(SelectedCategoryContext) as {
+    selectedCategory: string;
+  };
+
   useEffect(() => {
-    fetchProducts({
+    fetchHomeProducts({
       selectedCategory,
       setProductList,
       setNoProducts,
@@ -32,8 +34,8 @@ export default function ProductList({ selectedCategory }: ProductListType) {
         <HomeProduct
           key={i}
           id={product.id}
-          name={product.product_name}
-          category={product.category_name}
+          product_name={product.product_name}
+          category_name={product.category_name}
           description={product.description}
           price={product.price}
           size={product.size}
@@ -41,14 +43,14 @@ export default function ProductList({ selectedCategory }: ProductListType) {
         />
       ))}
 
-      {noProducts && <SubText>No products in this category</SubText>}
+      {noProducts && <RedirectToMenu />}
 
       {errorMessage && (
         <Flex className="">
           <SubText>{errorMessage}</SubText>
           <AltButton
             onClick={() =>
-              fetchProducts({
+              fetchHomeProducts({
                 selectedCategory,
                 setProductList,
                 setNoProducts,

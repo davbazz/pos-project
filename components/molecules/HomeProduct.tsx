@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { CartContext } from "@/components/providers/CartProvider";
 import type { CartType, CartItemType } from "@/types/CartType";
+import type { ProductType } from "@/types/ProductType";
 import AltButton from "../atoms/AltButton";
 import Flex from "../atoms/Flex";
 import MiniHeader from "../atoms/MiniHeader";
@@ -10,25 +11,15 @@ import SubText from "../atoms/SubText";
 import MainButton from "../atoms/MainButton";
 import Quantifier from "../atoms/Quantifier";
 
-type HomeProductProps = {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  price: number[];
-  size: string[];
-  img_url: string;
-};
-
 export default function HomeProduct({
   id,
-  name,
-  category,
+  product_name,
+  category_name,
   description,
   price,
   size,
   img_url,
-}: HomeProductProps) {
+}: ProductType) {
   const [selectedSize, setSelectedSize] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -41,8 +32,8 @@ export default function HomeProduct({
     const newProd: CartItemType = {
       product_id: id,
       quantity,
-      category,
-      name,
+      category_name,
+      product_name,
       size: size[selectedSize],
       price: price[selectedSize],
       total_price: price[selectedSize] * quantity,
@@ -64,7 +55,7 @@ export default function HomeProduct({
 
   useEffect(() => {
     setQuantity(1);
-  }, [category]);
+  }, [category_name]);
 
   return (
     <Flex className="">
@@ -73,12 +64,12 @@ export default function HomeProduct({
           <Flex className="">
             <ProductImg
               src={`https://gpyiizwtvjlrtoqrsvcl.supabase.co/storage/v1/object/sign/product_img/latte.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwcm9kdWN0X2ltZy9sYXR0ZS5qcGVnIiwiaWF0IjoxNjkzNzI2Njk4LCJleHAiOjE3MjUyNjI2OTh9.W6oCAKZ1QGU2FM6cKHZwqJnidS0Xj5Nmilr9qVp_3pE&t=2023-09-03T07%3A38%3A18.337Z`}
-              alt={name}
+              alt={product_name}
             />
           </Flex>
           <Flex className="flex-col">
             <Flex className="justify-between">
-              <MiniHeader>{name}</MiniHeader>
+              <MiniHeader>{product_name}</MiniHeader>
               <Price>{price[selectedSize]}</Price>
             </Flex>
             <SubText>{description}</SubText>

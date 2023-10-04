@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import OrderProvider from "@/components/providers/OrderProvider";
-import CartProvider from "@/components/providers/CartProvider";
+import { useEffect, useContext } from "react";
+import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
 import selectInitialCategory from "@/lib/selectInitialCategory";
 import HomeCategoriesNavBar from "@/components/molecules/HomeCategoriesNavBar";
 import HomeProductList from "@/components/organisms/HomeProductList";
@@ -12,30 +11,29 @@ import MainHeader from "@/components/atoms/MainHeader";
 import Cart from "@/components/organisms/Cart";
 
 export default function Homepage() {
-  // navbar props
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [noCategory, setNoCategory] = useState<boolean>(false);
+  const { selectedCategory, setSelectedCategory } = useContext(
+    SelectedCategoryContext
+  ) as {
+    selectedCategory: string;
+    setSelectedCategory: (newCategory: string) => void;
+  };
 
   useEffect(() => {
-    selectInitialCategory({ setSelectedCategory, setNoCategory });
+    selectInitialCategory({ setSelectedCategory });
   }, []);
 
   return (
-    <OrderProvider>
-      <CartProvider>
-        <main>
-          {noCategory ? (
-            <RedirectToMenu />
-          ) : (
-            <Flex className="flex-col">
-              <HomeCategoriesNavBar setSelectedCategory={setSelectedCategory} />
-              <MainHeader>{selectedCategory}</MainHeader>
-              <HomeProductList selectedCategory={selectedCategory} />
-              <Cart />
-            </Flex>
-          )}
-        </main>
-      </CartProvider>
-    </OrderProvider>
+    <main>
+      {selectedCategory === null || selectedCategory.length === 0 ? (
+        <RedirectToMenu />
+      ) : (
+        <Flex className="flex-col">
+          <HomeCategoriesNavBar />
+          <MainHeader>{selectedCategory}</MainHeader>
+          <HomeProductList />
+          <Cart />
+        </Flex>
+      )}
+    </main>
   );
 }

@@ -1,59 +1,120 @@
 "use client";
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import fetchProducts from "@/lib/fetchProducts";
+import { supabase } from "@/lib/clientSupabase";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, useContext } from "react";
+import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
+import { ProductWorkshopContext } from "@/components/providers/ProductWorkshopProvider";
+import type { ProductType } from "@/types/ProductType";
 import Flex from "../atoms/Flex";
-import Product from "../molecules/MenuProduct";
+import SubText from "../atoms/SubText";
+import AltButton from "../atoms/AltButton";
+import MenuProduct from "../molecules/MenuProduct";
 
-interface ProductListProps {
-  chosenMenuCategory: string | null;
-  productList: any[] | null;
-  setProductList: (products: [] | null) => void;
-}
+export default function productList() {
+  const [productList, setProductList] = useState<ProductType[] | null>(null);
+  const [noProducts, setNoProducts] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-export default function ProductList({
-  chosenMenuCategory,
-  productList,
-  setProductList,
-}: ProductListProps) {
-  const pathname = usePathname();
+  const router = useRouter();
+
+  const { selectedCategory } = useContext(SelectedCategoryContext) as {
+    selectedCategory: string;
+  };
+
+  const { setProductWorkshop } = useContext(ProductWorkshopContext) as {
+    setProductWorkshop: (newProd: ProductType) => void;
+  };
+
+  const setWorkshopToDefault = async () => {
+    const newProd = {
+      product_name: "",
+      category_name: selectedCategory,
+      user_id: (await supabase.auth.getUser()).data.user?.id,
+      description: "",
+      price: [0],
+      size: [""],
+      img_url: "",
+      ingredients: "",
+      available: true,
+    };
+    setProductWorkshop(newProd);
+  };
+
+  const fetchMenuProducts = async () => {
+    const { data: products, error } = await supabase
+      .from("menu_products")
+      .select(
+        "id, product_name, category_name, price, description, ingredients, available, size, img_url, listing_order"
+      )
+      .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
+      .eq("category_name", selectedCategory)
+      .order("listing_order", { ascending: true });
+
+    if (!error) {
+      setErrorMessage(null);
+      // console.log(products);
+      if (products.length > 0) {
+        setNoProducts(false), setProductList(products);
+      } else {
+        setProductList(null), setNoProducts(true);
+      }
+    } else {
+      setErrorMessage(error.message);
+    }
+
+    console.log("Products:", products);
+    console.log("Error:", error);
+    console.log("Category:", selectedCategory);
+  };
 
   useEffect(() => {
-    fetchProducts({ chosenMenuCategory, setProductList, pathname });
-  }, [chosenMenuCategory]);
+    const channel = supabase
+      .channel("menu_products")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "menu_products" },
+        () => {
+          fetchMenuProducts();
+          // router.refresh();
+          console.log("Change received!");
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  useEffect(() => {
+    fetchMenuProducts();
+    setWorkshopToDefault();
+  }, [selectedCategory]);
 
   return (
-    <Flex className="">
-      {pathname === "/home" && (
-        <Flex className="gap-4">
-          {productList?.map((product) => (
-            <Product
-              name={product.product_name}
-              description={product.description}
-              price={product.price}
-              size={product.size}
-              img_url={product.img_url}
-              pathname={pathname}
-            />
-          ))}
-        </Flex>
-      )}
+    <Flex className="gap-4">
+      {productList?.map((product, i) => (
+        <MenuProduct
+          key={i}
+          id={product.id}
+          product_name={product.product_name}
+          category_name={product.category_name}
+          description={product.description}
+          price={product.price}
+          size={product.size}
+          img_url={product.img_url}
+          available={product.available}
+          ingredients={product.ingredients}
+        />
+      ))}
 
-      {pathname === "/menu" && (
-        <Flex className="gap-4">
-          {productList?.map((product) => (
-            <Product
-              name={product.product_name}
-              description={product.description}
-              price={product.price}
-              size={product.size}
-              img_url={product.img_url}
-              ingredients={product.ingredients}
-              available={product.available}
-              pathname={pathname}
-            />
-          ))}
+      {noProducts && <SubText>No products in this category</SubText>}
+
+      {errorMessage && (
+        <Flex className="">
+          <SubText>{errorMessage}</SubText>
+          <AltButton onClick={fetchMenuProducts}>Try Again</AltButton>
         </Flex>
       )}
     </Flex>

@@ -1,7 +1,9 @@
 "use client";
 
 import { supabase } from "@/lib/clientSupabase";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
+import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
+import { MenuCategoriesContext } from "../providers/MenuCategoriesProvider";
 import getAllMenuCategories from "@/lib/getAllMenuCategories";
 import Flex from "../atoms/Flex";
 import MainButton from "../atoms/MainButton";
@@ -10,20 +12,22 @@ import goOnEnter from "@/lib/goOnEnter";
 import capitaliseFirstLetter from "@/lib/capitaliseFirstLetter";
 import getFirstCategory from "@/lib/selectInitialCategory";
 
-type MenuCategoriesNavBarProps = {
-  setSelectedCategory: (selectedCategory: string) => void;
-  noCategory: boolean;
-  setNoCategory: (noCategory: boolean) => void;
-};
-
-export default function MenuCategoriesNavBar({
-  setSelectedCategory,
-  noCategory,
-  setNoCategory,
-}: MenuCategoriesNavBarProps) {
-  const [menuCategories, setMenuCategories] = useState<string[]>([]);
+export default function MenuCategoriesNavBar() {
   const [addingNewCategory, setAddingNewCategory] = useState<boolean>(false);
   const [newCaterory, setNewCategory] = useState<string>("");
+
+  const { setSelectedCategory } = useContext(SelectedCategoryContext) as {
+    setSelectedCategory: (newCategory: string) => void;
+  };
+
+  const { menuCategories, setMenuCategories } = useContext(
+    MenuCategoriesContext
+  ) as {
+    menuCategories: string[];
+    setMenuCategories: (newCategories: string[]) => void;
+  };
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const addNewCategory = async () => {
     // get the latest listing number for that user categories table
@@ -80,22 +84,36 @@ export default function MenuCategoriesNavBar({
       }
 
       // set selected category to new one if there was no existing categories before
-      getFirstCategory({ setSelectedCategory, setNoCategory });
+      getFirstCategory({ setSelectedCategory });
     }
 
     // remove input field, erase newCategory value and show menu categories if hasn't been shown before
     setAddingNewCategory(false);
-    setNoCategory(false);
     setNewCategory("");
+  };
+
+  const handleOutsideClick = (e: MouseEvent) => {
+    if (inputRef.current && !inputRef.current.contains(e.target as Node)) {
+      return setAddingNewCategory(false), setNewCategory("");
+    }
   };
 
   useEffect(() => {
     getAllMenuCategories({ setMenuCategories });
   }, []);
 
+  useEffect(() => {
+    if (addingNewCategory === true) {
+      document.addEventListener("mousedown", handleOutsideClick);
+      return () => {
+        document.removeEventListener("mousedown", handleOutsideClick);
+      };
+    }
+  });
+
   return (
     <Flex className="justify-center items-center gap-6">
-      {noCategory && (
+      {menuCategories === null || menuCategories.length === 0 ? (
         <Flex className="">
           <MainButton onClick={() => setAddingNewCategory(true)}>
             Add new category
@@ -104,15 +122,15 @@ export default function MenuCategoriesNavBar({
             <CategoryInput
               type="text"
               placeholder="e.g Coffee"
+              className="removeOnOusideClick"
               value={newCaterory}
               onChange={(e) => setNewCategory(e.target.value)}
               onKeyDown={(e) => goOnEnter(e, addNewCategory)}
+              ref={inputRef}
             />
           )}
         </Flex>
-      )}
-
-      {menuCategories.length > 0 && menuCategories !== null && (
+      ) : (
         <Flex className="">
           {menuCategories.map((cat, i) => (
             <MainButton key={i} onClick={() => setSelectedCategory(cat)}>
@@ -126,9 +144,11 @@ export default function MenuCategoriesNavBar({
             <CategoryInput
               type="text"
               placeholder="e.g Coffee"
+              className="removeOnOusideClick"
               value={newCaterory}
               onChange={(e) => setNewCategory(e.target.value)}
               onKeyDown={(e) => goOnEnter(e, addNewCategory)}
+              ref={inputRef}
             />
           )}
         </Flex>

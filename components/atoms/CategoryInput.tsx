@@ -1,6 +1,12 @@
+import { forwardRef } from "react";
+
 interface CategoryInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-export default function CategoryInput({ ...props }: CategoryInputProps) {
-  return <input {...props} />;
-}
+const CategoryInput = forwardRef<HTMLInputElement, CategoryInputProps>(
+  (props, ref) => {
+    return <input ref={ref} {...props} />;
+  }
+);
+
+export default CategoryInput;

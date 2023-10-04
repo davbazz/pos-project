@@ -7,7 +7,7 @@ interface fetchProductsProps {
   setErrorMessage: (error: string | null) => void;
 }
 
-export default async function fetchProducts({
+export default async function fetchHomeProducts({
   selectedCategory,
   setProductList,
   setNoProducts,
