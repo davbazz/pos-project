@@ -12,7 +12,7 @@ import Input from "../atoms/Input";
 import SelectLabel from "../atoms/SelectLabel";
 
 export default function MenuProductWorkshop() {
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<File | string>("");
   const [uniqueID, setUniqueID] = useState<string>();
   const [available, setAvailable] = useState<boolean>(true);
   const [name, setName] = useState<string>("");
