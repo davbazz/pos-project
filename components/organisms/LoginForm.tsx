@@ -14,6 +14,7 @@ export default function LoginForm() {
   const [error, setError] = useState<string>();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
+  const [checkYourEmailMessage, setCheckYourEmailMessage] = useState(false);
 
   const supabase = createClientComponentClient();
   const router = useRouter();
