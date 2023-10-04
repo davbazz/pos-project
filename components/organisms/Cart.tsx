@@ -25,8 +25,9 @@ export default function Cart() {
     setOrder: (newOrder: OrderType) => void;
   };
 
-  const { cart } = useContext(CartContext) as {
+  const { cart, setCart } = useContext(CartContext) as {
     cart: CartType;
+    setCart: (newCart: null) => void;
   };
 
   const handleQuantity: number =
@@ -77,6 +78,7 @@ export default function Cart() {
 
       if (!error) {
         console.log("order placed successfully");
+        setCart(null);
       } else {
         console.log(error);
       }
