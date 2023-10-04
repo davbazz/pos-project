@@ -94,11 +94,9 @@ export default function Cart() {
       console.error("Error fetching latest order ID:", error.message);
       return null;
     }
-
     if (data && data.length > 0) {
       return setOrderId(data[0].id + 1);
     }
-
     return null;
   };
 

@@ -34,6 +34,7 @@ export default function HomeProduct({
       quantity,
       category_name,
       product_name,
+      img_url,
       size: size[selectedSize],
       price: price[selectedSize],
       total_price: price[selectedSize] * quantity,
