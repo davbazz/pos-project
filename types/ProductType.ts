@@ -7,6 +7,6 @@ export type ProductType = {
   price: number[];
   size: string[];
   img_url: string;
-  ingredients?: string;
-  available?: boolean;
+  ingredients: string;
+  available: boolean;
 };

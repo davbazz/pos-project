@@ -40,6 +40,8 @@ export default function HomeProductList() {
           price={product.price}
           size={product.size}
           img_url={product.img_url}
+          ingredients={product.ingredients}
+          available={product.available}
         />
       ))}
 
