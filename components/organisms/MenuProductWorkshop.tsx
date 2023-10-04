@@ -45,7 +45,7 @@ export default function MenuProductWorkshop() {
     const value = e.target.value.split("");
     if (value[value.length - 1] === ".") {
       setPrice((prev) => {
-        const newArr = [...prev];
+        const newArr: any = [...prev];
         newArr[i] = e.target.value;
         console.log(newArr);
         return newArr;
@@ -59,6 +59,20 @@ export default function MenuProductWorkshop() {
       });
     }
   };
+
+  // const updatePrice = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = e.target.value;
+  //   const parsedValue = parseFloat(e.target.value);
+
+  //   if (!isNaN(parsedValue)) {
+  //     setPrice((prev) => {
+  //       const newArr = [...prev];
+  //       newArr[i] = parsedValue;
+  //       console.log(newArr);
+  //       return newArr;
+  //     });
+  //   }
+  // };
 
   // add 1 more row to size and price
   const addSizePrice = () => {
