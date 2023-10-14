@@ -41,7 +41,7 @@ export default function History() {
             <SubText>{order.status}</SubText>
             <SubText>{order.total_price}</SubText>
             <Flex className="gap-2">
-              {order.products.map((p, i) => {
+              {order.products.map((p: any, i) => {
                 return <SubText key={i}>{JSON.parse(p).product_name}</SubText>;
               })}
             </Flex>
