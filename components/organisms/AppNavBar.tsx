@@ -8,9 +8,7 @@ export default function AppNavBar() {
       <Flex className="justify-start flex-col gap-2">
         <LinkButton href="/home">Home</LinkButton>
         <LinkButton href="/menu">Menu</LinkButton>
-        <LinkButton href="/products">History</LinkButton>
-        <LinkButton href="/analytics">Analytics</LinkButton>
-        <LinkButton href="/settings">Settings</LinkButton>
+        <LinkButton href="/history">History</LinkButton>
         <LogoutButton />
       </Flex>
     </aside>

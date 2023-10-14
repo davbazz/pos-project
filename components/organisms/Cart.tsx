@@ -6,14 +6,15 @@ import { OrderContext } from "@/components/providers/OrderProvider";
 import { CartContext } from "@/components/providers/CartProvider";
 import type { OrderType } from "@/types/OrderType";
 import type { CartType } from "@/types/CartType";
+import QRCode from "react-qr-code";
 import Flex from "../atoms/Flex";
 import MainHeader from "../atoms/MainHeader";
 import MiniHeader from "../atoms/MainHeader";
-import OrderOptions from "../molecules/OrderOptions";
 import SubText from "../atoms/SubText";
 import Price from "../atoms/Price";
 import MainButton from "../atoms/MainButton";
 import CartProductList from "../molecules/CartProductList";
+import AltButton from "../atoms/AltButton";
 
 export default function Cart() {
   const [options, setOptions] = useState<string[] | null>(null);
@@ -28,6 +29,21 @@ export default function Cart() {
   const { cart, setCart } = useContext(CartContext) as {
     cart: CartType;
     setCart: (newCart: null) => void;
+  };
+
+  const fetchOrderOptions = async () => {
+    const { data: options, error } = await supabase
+      .from("order_options")
+      .select("options")
+      .eq("user_id", (await supabase.auth.getUser()).data.user?.id);
+
+    if (error) {
+      console.error(error.message);
+    }
+    if (options != null && options.length > 0) {
+      setOptions(options[0].options);
+      setSelectedOption(options[0].options[0]);
+    }
   };
 
   const handleQuantity: number =
@@ -47,7 +63,9 @@ export default function Cart() {
       order_option: selectedOption,
       total_price: totalPrice,
       products: cart,
+      status: "pending",
     };
+    console.log(updatedOrder);
 
     if (
       updatedOrder.user_id &&
@@ -66,21 +84,25 @@ export default function Cart() {
 
   const placeOrder = async () => {
     if (cart !== null) {
-      const { error } = await supabase.from("order_history").insert([
-        {
-          user_id: order?.user_id,
-          items_quantity: order?.items_quantity,
-          order_option: order?.order_option,
-          total_price: order?.total_price,
-          products: order?.products,
-        },
-      ]);
+      const { data, error } = await supabase
+        .from("order_history")
+        .insert([
+          {
+            user_id: order?.user_id,
+            items_quantity: order?.items_quantity,
+            order_option: order?.order_option,
+            total_price: order?.total_price,
+            products: order?.products,
+          },
+        ])
+        .select();
 
-      if (!error) {
+      if (error) {
+        console.error("Error placing order:", error.message);
+      }
+      if (data != null && data?.length > 0) {
         console.log("order placed successfully");
         setCart(null);
-      } else {
-        console.log(error);
       }
     }
   };
@@ -94,20 +116,19 @@ export default function Cart() {
 
     if (error) {
       console.error("Error fetching latest order ID:", error.message);
-      return null;
     }
-    if (data && data.length > 0) {
-      return setOrderId(data[0].id + 1);
+    if (data != null && data.length > 0) {
+      setOrderId(data[0].id + 1);
     }
-    return null;
   };
 
   useEffect(() => {
+    getOrderId();
     updateOrder();
   }, [cart]);
 
   useEffect(() => {
-    getOrderId();
+    fetchOrderOptions();
   }, []);
 
   return (
@@ -120,17 +141,20 @@ export default function Cart() {
             <MainHeader>Cart</MainHeader>
             <MiniHeader>{`#${orderId}`}</MiniHeader>
           </Flex>
-          <OrderOptions
-            options={options}
-            setOptions={setOptions}
-            setSelectedOption={setSelectedOption}
-          />
+          <Flex className="justify-between">
+            {options?.map((option) => (
+              <AltButton onClick={() => setSelectedOption(option)}>
+                {option}
+              </AltButton>
+            ))}
+          </Flex>
           <CartProductList />
           <Flex className="justify-between">
             <SubText>Total</SubText>
             <Price>{`${totalPrice}£`}</Price>
           </Flex>
           <MainButton onClick={placeOrder}>Place an order</MainButton>
+          <QRCode value="https://pos-project-phi.vercel.app/sign-in" />
         </Flex>
       )}
     </Flex>

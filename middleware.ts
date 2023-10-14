@@ -7,40 +7,19 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
 
-  // const david = await supabase
-  //   .from("tenants")
-  //   .select("email")
-  //   .eq("email", "bazashvilidavid@gmail.com");
-
-  // console.log(david);
-
-  // if (david && req.nextUrl.pathname === "/login") {
-  //   console.log("logged in");
-  // }
   const { data: session } = await supabase.auth.getSession();
 
-  // if (!session && req.nextUrl.pathname !== "/login") {
-  //   console.log(session);
-  //   console.log("redirected");
-  //   return NextResponse.redirect("/login");
-  // } else {
-  //   console.log(session);
-  //   console.log(req.nextUrl);
-  //   console.log("normal flow");
-  // }
+  if (session.session) {
+    return res;
+  }
 
-  // Check if the session is not available and the path requires authentication
-  // if (!session && req.nextUrl.pathname !== "/login") {
-  //   const url = new URL(req.url);
-  //   url.pathname = "/login";
-  //   console.log(session);
-  //   return NextResponse.redirect(url);
-  // } else {
-  //   console.log(session);
-  // }
-
-  // Continue with the request/response flow
-  return res;
+  const redirectUrl = req.nextUrl.clone();
+  redirectUrl.pathname = "/sign-in";
+  redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname);
+  return NextResponse.redirect(redirectUrl);
 }
 
-export default middleware;
+export const config = {
+  // list all the pages you want protected here
+  matcher: ["/", "/menu", "/home", "/history"],
+};
