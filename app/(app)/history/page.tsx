@@ -46,7 +46,7 @@ export default function History() {
               })}
             </Flex>
             <SubText>{order.order_option}</SubText>
-            <SubText>{dateConverter(order.created_at)}</SubText>
+            <SubText>{dateConverter(order.created_at ?? "Error")}</SubText>
           </Flex>
         ))}
       {!history && <p>Loading...</p>}
