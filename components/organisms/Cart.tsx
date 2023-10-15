@@ -93,6 +93,7 @@ export default function Cart() {
             order_option: order?.order_option,
             total_price: order?.total_price,
             products: order?.products,
+            status: order?.status,
           },
         ])
         .select();
@@ -154,7 +155,7 @@ export default function Cart() {
             <Price>{`${totalPrice}£`}</Price>
           </Flex>
           <MainButton onClick={placeOrder}>Place an order</MainButton>
-          <QRCode value="https://pos-project-phi.vercel.app/sign-in" />
+          {/* <QRCode value="https://pos-project-phi.vercel.app/sign-in" /> */}
         </Flex>
       )}
     </Flex>

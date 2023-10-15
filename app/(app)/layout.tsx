@@ -15,12 +15,10 @@ export const metadata: Metadata = {
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <TopBar />
-        <AppNavBar />
-        <MainScreen children={children} />
-      </body>
-    </html>
+    <main className={inter.className}>
+      <TopBar />
+      <AppNavBar />
+      <MainScreen children={children} />
+    </main>
   );
 }

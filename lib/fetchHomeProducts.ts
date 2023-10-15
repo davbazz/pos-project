@@ -25,7 +25,6 @@ export default async function fetchHomeProducts({
 
   if (!error) {
     setErrorMessage(null);
-    console.log(products);
 
     if (products.length > 0) {
       return setNoProducts(false), setProductList(products);

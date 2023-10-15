@@ -72,8 +72,11 @@ export default function HomeProduct({
             </Flex>
             <SubText>{description}</SubText>
             <Flex className="justify-between">
-              {size.map((s) => (
-                <AltButton onClick={() => setSelectedSize(size.indexOf(s))}>
+              {size.map((s, i) => (
+                <AltButton
+                  key={i}
+                  onClick={() => setSelectedSize(size.indexOf(s))}
+                >
                   {s}
                 </AltButton>
               ))}
