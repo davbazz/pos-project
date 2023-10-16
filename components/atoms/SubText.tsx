@@ -4,5 +4,9 @@ interface SubTextType extends React.HTMLAttributes<HTMLParagraphElement> {
 }
 
 export default function SubText({ children, ...props }: SubTextType) {
-  return <p {...props}>{children}</p>;
+  return (
+    <p className="text-sm text-secondary/70" {...props}>
+      {children}
+    </p>
+  );
 }

@@ -7,7 +7,11 @@ interface TextLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
 
 export default function TextLink({ href, children, ...props }: TextLinkProps) {
   return (
-    <Link href={href} {...props}>
+    <Link
+      href={href}
+      {...props}
+      className="text-sm text-center hover:underline"
+    >
       {children}
     </Link>
   );

@@ -15,7 +15,7 @@ export default function MainScreen({
       <MenuCategoriesProvider>
         <OrderProvider>
           <CartProvider>
-            <article>{children}</article>
+            <article className="ml-[140px]">{children}</article>
           </CartProvider>
         </OrderProvider>
       </MenuCategoriesProvider>

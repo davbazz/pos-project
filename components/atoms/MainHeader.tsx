@@ -3,5 +3,9 @@ interface MainHeaderType extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 export default function MainHeader({ children, ...props }: MainHeaderType) {
-  return <h2 {...props}>{children}</h2>;
+  return (
+    <h2 className="text-2xl text-secondary" {...props}>
+      {children}
+    </h2>
+  );
 }

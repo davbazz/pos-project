@@ -4,5 +4,9 @@ interface LabelProps extends React.HTMLAttributes<HTMLLabelElement> {
 }
 
 export default function Label({ children, ...props }: LabelProps) {
-  return <label {...props}>{children}</label>;
+  return (
+    <label className="text-sm text-secondary" {...props}>
+      {children}
+    </label>
+  );
 }

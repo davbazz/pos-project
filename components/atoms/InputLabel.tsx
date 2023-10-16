@@ -1,3 +1,4 @@
+import Flex from "./Flex";
 import Label from "../atoms/Label";
 import Input from "../atoms/Input";
 
@@ -6,9 +7,9 @@ interface InputLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {
   htmlFor: string;
   placeholder?: string;
   type?: string;
-  id: string;
   value: string | number | string[];
-  onClick?: () => void;
+  onChange?: (e: any) => void;
+  onKeyDown?: (e: any) => void;
 }
 
 export default function InputLabel({
@@ -16,20 +17,20 @@ export default function InputLabel({
   htmlFor,
   placeholder,
   type,
-  id,
   value,
+  onKeyDown,
   ...props
 }: InputLabelProps) {
   return (
-    <div className="label-container">
+    <Flex className="flex-col gap-2">
       <Label htmlFor={htmlFor}>{label}</Label>
       <Input
         type={type}
-        id={id}
         placeholder={placeholder}
         value={value}
+        onKeyDown={onKeyDown}
         {...props}
       />
-    </div>
+    </Flex>
   );
 }

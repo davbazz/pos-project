@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/clientSupabase";
 import Flex from "../atoms/Flex";
-import Input from "../atoms/Input";
-import Label from "../atoms/Label";
-import Button from "../atoms/MainButton";
 import SubText from "../atoms/SubText";
 import GoOnEnter from "@/lib/goOnEnter";
+import InputLabel from "../atoms/InputLabel";
+import AltButton from "../atoms/AltButton";
+import ErrorMessage from "../atoms/ErrorMessage";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState<string>("");
@@ -16,7 +16,6 @@ export default function SignUpForm() {
   const [error, setError] = useState<string>();
   const [checkEmail, setCheckEmail] = useState<boolean>(false);
 
-  const supabase = createClientComponentClient();
   const router = useRouter();
 
   const handleSignUp = async () => {
@@ -38,32 +37,34 @@ export default function SignUpForm() {
 
   switch (checkEmail) {
     case true:
-      return <SubText>Check you email</SubText>;
+      return <SubText>Check your email</SubText>;
     case false:
       return (
-        <Flex className="">
-          <Flex className="">
-            <Label htmlFor="email">Email Address</Label>
-            <Input
+        <Flex className="flex-col gap-8">
+          <Flex className="flex-col gap-4">
+            <InputLabel
+              htmlFor="email"
+              label="Email"
               type="email"
               name="email"
-              value={email}
               placeholder="Your email address"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Label htmlFor="password">Your Password</Label>
-            <Input
+            <InputLabel
+              htmlFor="password"
+              label="Password"
               type="password"
               name="password"
-              value={password}
               placeholder="Your password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => GoOnEnter(e, handleSignUp)}
             />
-            <Button onClick={handleSignUp}>Sign Up</Button>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
           </Flex>
 
-          {error && <SubText>{error}</SubText>}
+          <AltButton onClick={handleSignUp}>Sign In</AltButton>
         </Flex>
       );
   }

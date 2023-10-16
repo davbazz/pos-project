@@ -15,7 +15,10 @@ export default function LogoutButton() {
   };
 
   return (
-    <Flex className="gap-4" onClick={handleSignOut}>
+    <Flex
+      className="justify-center gap-3 items-center hover:bg-alternative p-3 rounded-md cursor-pointer text-sm"
+      onClick={handleSignOut}
+    >
       <LogoutIcon />
       <p>Sign out</p>
     </Flex>

@@ -4,5 +4,9 @@ interface MainButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 export default function MainButton({ children, onClick }: MainButtonProps) {
-  return <button onClick={onClick}>{children}</button>;
+  return (
+    <button onClick={onClick} className="">
+      {children}
+    </button>
+  );
 }

@@ -15,9 +15,7 @@ export default async function fetchMenuProducts({
 }: fetchProductsProps) {
   const { data: products, error } = await supabase
     .from("menu_products")
-    .select(
-      "id, product_name, category_name, price, description, ingredients, available, size, img_url, listing_order"
-    )
+    .select("*")
     .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
     .eq("category_name", selectedCategory)
     .order("listing_order", { ascending: true });
