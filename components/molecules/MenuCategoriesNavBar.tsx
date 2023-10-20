@@ -115,7 +115,10 @@ export default function MenuCategoriesNavBar() {
     <Flex className="justify-center items-center gap-6">
       {menuCategories === null || menuCategories.length === 0 ? (
         <Flex className="">
-          <MainButton onClick={() => setAddingNewCategory(true)}>
+          <MainButton
+            cssSet="categorySet"
+            onClick={() => setAddingNewCategory(true)}
+          >
             Add new category
           </MainButton>
           {addingNewCategory && (
@@ -133,11 +136,18 @@ export default function MenuCategoriesNavBar() {
       ) : (
         <Flex className="">
           {menuCategories.map((cat, i) => (
-            <MainButton key={i} onClick={() => setSelectedCategory(cat)}>
+            <MainButton
+              cssSet="categorySet"
+              key={i}
+              onClick={() => setSelectedCategory(cat)}
+            >
               {cat}
             </MainButton>
           ))}
-          <MainButton onClick={() => setAddingNewCategory(true)}>
+          <MainButton
+            cssSet="categorySet"
+            onClick={() => setAddingNewCategory(true)}
+          >
             Add new
           </MainButton>
           {addingNewCategory && (
