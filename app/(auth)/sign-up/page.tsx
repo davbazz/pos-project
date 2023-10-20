@@ -3,7 +3,7 @@ import SubText from "@/components/atoms/SubText";
 import TextLink from "@/components/atoms/TextLink";
 import SignUpForm from "@/components/organisms/SignUpForm";
 import Flex from "@/components/atoms/Flex";
-import BZVLogo from "@/components/atoms/BZVLogo";
+import BZVLogo from "@/components/svg's/BZVLogo";
 
 export default function SignUp() {
   return (

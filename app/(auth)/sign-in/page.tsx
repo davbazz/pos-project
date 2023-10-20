@@ -1,4 +1,4 @@
-import BZVLogo from "@/components/atoms/BZVLogo";
+import BZVLogo from "@/components/svg's/BZVLogo";
 import Flex from "@/components/atoms/Flex";
 import MainHeader from "@/components/atoms/MainHeader";
 import SubText from "@/components/atoms/SubText";

@@ -9,6 +9,7 @@ import RedirectToMenu from "@/components/molecules/RedirectToMenu";
 import Flex from "@/components/atoms/Flex";
 import MainHeader from "@/components/atoms/MainHeader";
 import Cart from "@/components/organisms/Cart";
+import Relative from "@/components/atoms/Relative";
 
 export default function Homepage() {
   const { selectedCategory, setSelectedCategory } = useContext(
@@ -23,17 +24,19 @@ export default function Homepage() {
   }, []);
 
   return (
-    <main>
+    <div>
       {selectedCategory === null || selectedCategory.length === 0 ? (
         <RedirectToMenu />
       ) : (
-        <Flex className="flex-col">
-          <HomeCategoriesNavBar />
-          <MainHeader>{selectedCategory}</MainHeader>
-          <HomeProductList />
+        <Relative>
+          <Flex className="flex-col gap-8 w-1/2">
+            <HomeCategoriesNavBar />
+            <MainHeader>{selectedCategory + " menu"}</MainHeader>
+            <HomeProductList />
+          </Flex>
           <Cart />
-        </Flex>
+        </Relative>
       )}
-    </main>
+    </div>
   );
 }

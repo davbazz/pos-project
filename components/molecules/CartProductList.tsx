@@ -5,6 +5,7 @@ import { CartType } from "@/types/CartType";
 import { CartContext } from "../providers/CartProvider";
 import Flex from "../atoms/Flex";
 import CartProduct from "./CartProduct";
+import EmptyCartMessage from "../atoms/EmptyCartMessage";
 
 export default function CartProductList() {
   const { cart } = useContext(CartContext) as {
@@ -12,9 +13,9 @@ export default function CartProductList() {
   };
 
   return (
-    <Flex className="">
-      {cart && cart.map((prod, i) => <CartProduct prod={prod} key={i} />)}
-      {cart === null && "No products in cart"}
+    <Flex className="flex-row flex-wrap">
+      {cart && cart.map((prod, i) => <CartProduct prod={prod} i={i} key={i} />)}
+      {cart === null && <EmptyCartMessage />}
     </Flex>
   );
 }

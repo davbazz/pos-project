@@ -15,7 +15,9 @@ export default function MainScreen({
       <MenuCategoriesProvider>
         <OrderProvider>
           <CartProvider>
-            <article className="ml-[140px]">{children}</article>
+            <article className="ml-[170px] px-6 py-6 bg-alternative">
+              {children}
+            </article>
           </CartProvider>
         </OrderProvider>
       </MenuCategoriesProvider>

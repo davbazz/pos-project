@@ -25,12 +25,16 @@ export default function HomeCategoriesNavBar() {
   }, []);
 
   return (
-    <Flex className="justify-center items-center gap-6">
+    <Flex className="justify-start overflow-x-scroll">
       {menuCategories?.length > 0 && menuCategories !== null ? (
-        <Flex className="">
-          {menuCategories.map((cat, i) => (
-            <MainButton key={i} onClick={() => setSelectedCategory(cat)}>
-              {cat}
+        <Flex className="items-center gap-3">
+          {menuCategories.map((c, i) => (
+            <MainButton
+              key={i}
+              cssSet="categorySet"
+              onClick={() => setSelectedCategory(c)}
+            >
+              {c}
             </MainButton>
           ))}
         </Flex>

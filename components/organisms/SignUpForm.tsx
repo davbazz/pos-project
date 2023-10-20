@@ -7,8 +7,8 @@ import Flex from "../atoms/Flex";
 import SubText from "../atoms/SubText";
 import GoOnEnter from "@/lib/goOnEnter";
 import InputLabel from "../atoms/InputLabel";
-import AltButton from "../atoms/AltButton";
 import ErrorMessage from "../atoms/ErrorMessage";
+import AuthButton from "../atoms/AuthButton";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState<string>("");
@@ -64,7 +64,7 @@ export default function SignUpForm() {
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </Flex>
 
-          <AltButton onClick={handleSignUp}>Sign In</AltButton>
+          <AuthButton onClick={handleSignUp}>Sign In</AuthButton>
         </Flex>
       );
   }

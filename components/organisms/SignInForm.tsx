@@ -4,11 +4,10 @@ import { useState } from "react";
 import { supabase } from "@/lib/clientSupabase";
 import { useRouter } from "next/navigation";
 import Flex from "../atoms/Flex";
-import SubText from "../atoms/SubText";
 import GoOnEnter from "@/lib/goOnEnter";
 import InputLabel from "../atoms/InputLabel";
-import AltButton from "../atoms/AltButton";
 import ErrorMessage from "../atoms/ErrorMessage";
+import AuthButton from "../atoms/AuthButton";
 
 export default function SignInForm() {
   const [email, setEmail] = useState<string>("");
@@ -55,7 +54,7 @@ export default function SignInForm() {
 
       {error && <ErrorMessage>{error}</ErrorMessage>}
 
-      <AltButton onClick={handleSignIn}>Sign In</AltButton>
+      <AuthButton onClick={handleSignIn}>Sign In</AuthButton>
     </Flex>
   );
 }

@@ -15,10 +15,11 @@ import Price from "../atoms/Price";
 import MainButton from "../atoms/MainButton";
 import CartProductList from "../molecules/CartProductList";
 import AltButton from "../atoms/AltButton";
+import EmptyCartMessage from "../atoms/EmptyCartMessage";
 
 export default function Cart() {
-  const [options, setOptions] = useState<string[] | null>(null);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [options, setOptions] = useState<string[] | null>();
+  const [selectedOption, setSelectedOption] = useState<string>("");
   const [orderId, setOrderId] = useState<number | null>(null);
 
   const { order, setOrder } = useContext(OrderContext) as {
@@ -65,7 +66,6 @@ export default function Cart() {
       products: cart,
       status: "pending",
     };
-    console.log(updatedOrder);
 
     if (
       updatedOrder.user_id &&
@@ -133,28 +133,33 @@ export default function Cart() {
   }, []);
 
   return (
-    <Flex className="">
+    <Flex className="fixed top-0 right-0 w-[300px] h-screen bg-white border-l-[1px] border-l-linear px-5 py-6">
       {cart === null || cart.length === 0 ? (
-        <SubText>Cart is empty</SubText>
+        <EmptyCartMessage />
       ) : (
-        <Flex className="flex-col gap-4">
-          <Flex className="justify-between">
+        <Flex className="flex-col gap-7">
+          <Flex className="justify-between items-center">
             <MainHeader>Cart</MainHeader>
-            <MiniHeader>{`#${orderId}`}</MiniHeader>
+            <SubText>{`Order #${orderId}`}</SubText>
           </Flex>
           <Flex className="justify-between">
             {options?.map((option) => (
-              <AltButton onClick={() => setSelectedOption(option)}>
+              <AltButton
+                onClick={() => setSelectedOption(option)}
+                onChoice={selectedOption}
+              >
                 {option}
               </AltButton>
             ))}
           </Flex>
           <CartProductList />
-          <Flex className="justify-between">
-            <SubText>Total</SubText>
-            <Price>{`${totalPrice}£`}</Price>
+          <Flex className="justify-between items-center">
+            <SubText>Total: </SubText>
+            <Price color="primary" font="semibold">{`£ ${totalPrice}`}</Price>
           </Flex>
-          <MainButton onClick={placeOrder}>Place an order</MainButton>
+          <MainButton onClick={placeOrder} cssSet="cartSet">
+            Place an order
+          </MainButton>
           {/* <QRCode value="https://pos-project-phi.vercel.app/sign-in" /> */}
         </Flex>
       )}

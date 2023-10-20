@@ -59,23 +59,29 @@ export default function HomeProduct({
   }, [category_name]);
 
   return (
-    <Flex className="">
-      <Flex className="flex-col gap-2">
-        <Flex className="justify-between">
-          <Flex className="">
+    <Flex className="rounded-2xl bg-white p-3">
+      <Flex className="flex-col gap-5">
+        <Flex className="justify-between gap-5">
+          <Flex className="rounded-2xl">
             <ProductImg src={img_url} alt={product_name} />
           </Flex>
-          <Flex className="flex-col">
-            <Flex className="justify-between">
-              <MiniHeader>{product_name}</MiniHeader>
-              <Price>{price[selectedSize]}</Price>
+          <Flex className="flex-col justify-between">
+            <Flex className="flex-col gap-3">
+              <Flex className="justify-start items-center gap-3">
+                <MiniHeader font="semibold">{product_name}</MiniHeader>
+                <Price
+                  color="primary"
+                  font="semibold"
+                >{`£ ${price[selectedSize]}`}</Price>
+              </Flex>
+              <SubText>{`"${description}"`}</SubText>
             </Flex>
-            <SubText>{description}</SubText>
-            <Flex className="justify-between">
+            <Flex className="justify-between gap-2">
               {size.map((s, i) => (
                 <AltButton
                   key={i}
                   onClick={() => setSelectedSize(size.indexOf(s))}
+                  onChoice={size[selectedSize]}
                 >
                   {s}
                 </AltButton>
@@ -83,11 +89,12 @@ export default function HomeProduct({
             </Flex>
           </Flex>
         </Flex>
-        <Flex className="">
+        <Flex className="justify-between items-center">
           <Quantifier
             quantity={quantity}
             setQuantity={setQuantity}
-          ></Quantifier>
+            location="home product"
+          />
           <MainButton onClick={addProdToCart}>Add to cart</MainButton>
         </Flex>
       </Flex>

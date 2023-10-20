@@ -17,8 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={font.className}>
       <body>
-        <main className="hidden md:block">{children}</main>
-        <aside className="md:hidden">
+        <main className="hidden lg:block">{children}</main>
+        <aside className="lg:hidden">
           This screen resolution is not supported, please use larger device
         </aside>
       </body>
