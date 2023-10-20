@@ -61,12 +61,6 @@ export default function CartProduct({
   //     const index = updatedCart.findIndex(
   //       (i) => i.product_id === prod.product_id && i.size == prod.size
   //     );
-  //     updatedCart.splice(index, 1);
-  //     setCart(updatedCart);
-  //   } else {
-  //     console.log("Error: couldn't delete the product");
-  //   }
-  // };
 
   {
     /* this one doesnt work */

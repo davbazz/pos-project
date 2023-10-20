@@ -95,7 +95,9 @@ export default function HomeProduct({
             setQuantity={setQuantity}
             location="home product"
           />
-          <MainButton onClick={addProdToCart}>Add to cart</MainButton>
+          <MainButton onClick={addProdToCart} cssSet="productSet">
+            Add to cart
+          </MainButton>
         </Flex>
       </Flex>
     </Flex>
