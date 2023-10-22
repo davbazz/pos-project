@@ -16,6 +16,7 @@ import MainButton from "../atoms/MainButton";
 import CartProductList from "../molecules/CartProductList";
 import AltButton from "../atoms/AltButton";
 import EmptyCartMessage from "../atoms/EmptyCartMessage";
+import priceValidation from "@/lib/priceValidation";
 
 export default function Cart() {
   const [options, setOptions] = useState<string[] | null>();
@@ -133,11 +134,11 @@ export default function Cart() {
   }, []);
 
   return (
-    <Flex className="fixed top-0 right-0 w-[300px] h-screen bg-white border-l-[1px] border-l-linear px-5 py-6">
+    <Flex className="fixed top-0 right-0 w-[280px] h-screen bg-white border-l-[1px] border-l-linear px-5 py-6">
       {cart === null || cart.length === 0 ? (
         <EmptyCartMessage />
       ) : (
-        <Flex className="flex-col gap-7">
+        <Flex className="w-full flex-col gap-7">
           <Flex className="justify-between items-center">
             <MainHeader>Cart</MainHeader>
             <SubText>{`Order #${orderId}`}</SubText>
@@ -155,7 +156,9 @@ export default function Cart() {
           <CartProductList />
           <Flex className="justify-between items-center">
             <SubText>Total: </SubText>
-            <Price color="primary" font="semibold">{`£ ${totalPrice}`}</Price>
+            <Price color="primary" font="semibold">{`£ ${priceValidation(
+              totalPrice
+            )}`}</Price>
           </Flex>
           <MainButton onClick={placeOrder} cssSet="cartSet">
             Place an order

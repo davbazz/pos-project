@@ -21,7 +21,7 @@ export default function Quantifier({
   };
 
   return (
-    <Flex className="gap-3">
+    <Flex className="gap-2">
       <Flex
         onClick={decreaseQuantity}
         className="w-7 h-7 rounded-full border-[1px] leading-6 border-secondary/20 text-center text-2xl flex items-center justify-center hover:bg-alternative"

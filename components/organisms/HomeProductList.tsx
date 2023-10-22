@@ -29,7 +29,7 @@ export default function HomeProductList() {
   }, [selectedCategory]);
 
   return (
-    <Flex className="flex-wrap gap-4">
+    <Flex className="flex-wrap gap-4 w-full">
       {productList?.map((product, i) => (
         <HomeProduct
           key={i}

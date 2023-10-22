@@ -24,25 +24,16 @@ export default function MainButton({
       : "bg-transparent text-secondary border-[1px] border-linear hover:bg-white"
   }`;
 
-  const productSet = `rounded-[32px] text-sm px-6 py-2 ${
-    children === selectedCategory
-      ? "bg-primary text-white border-[1px] border-primary"
-      : "bg-transparent text-secondary border-[1px] border-linear hover:bg-white"
-  }`;
+  const productSet = `text-white bg-primary hover:bg-softPrimary px-6 py-2 text-sm w-[calc(65%-12px)]`;
 
   // const authSet =
 
   return (
     <button
       onClick={onClick}
-      // className={`rounded-[32px] text-base px-6 py-[10px] ${
-      //   children === selectedCategory
-      //     ? "bg-primary text-white border-[1px] border-primary"
-      //     : "bg-transparent text-secondary border-[1px] border-linear hover:bg-white"
-      // }`}
       className={`rounded-[32px] ${cssSet === "categorySet" && categorySet} ${
         cssSet === "cartSet" && cartSet
-      }`}
+      } ${cssSet === "productSet" && productSet}`}
     >
       {children}
     </button>

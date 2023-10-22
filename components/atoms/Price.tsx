@@ -6,7 +6,7 @@ interface PriceType extends React.HTMLProps<HTMLParagraphElement> {
 
 export default function Price({ children, color, font, ...props }: PriceType) {
   return (
-    <p {...props} className={`text-${color} font-${font} text-base`}>
+    <p {...props} className={`text-${color} font-${font} text-sm`}>
       {children}
     </p>
   );

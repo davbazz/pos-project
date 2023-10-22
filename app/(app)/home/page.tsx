@@ -29,7 +29,7 @@ export default function Homepage() {
         <RedirectToMenu />
       ) : (
         <Relative>
-          <Flex className="flex-col gap-8 w-1/2">
+          <Flex className="flex-col gap-8 w-[calc(100%-280px)]">
             <HomeCategoriesNavBar />
             <MainHeader>{selectedCategory + " menu"}</MainHeader>
             <HomeProductList />

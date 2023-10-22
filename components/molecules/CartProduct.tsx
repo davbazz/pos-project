@@ -8,6 +8,7 @@ import ProductImg from "../atoms/ProductImg";
 import Quantifier from "../atoms/Quantifier";
 import SubText from "../atoms/SubText";
 import MiniHeader from "../atoms/MiniHeader";
+import priceValidation from "@/lib/priceValidation";
 
 export default function CartProduct({
   prod,
@@ -23,23 +24,6 @@ export default function CartProduct({
     setCart: (newCart: any) => void;
   };
 
-  {
-    /* old version */
-  }
-  // const updateCart = () => {
-  //   if (cart !== null && Array.isArray(cart)) {
-  //     const updatedCart: CartType = [...cart];
-  //     const index = updatedCart.findIndex(
-  //       (i) => i.product_id === prod.product_id
-  //     );
-  //     updatedCart[index].quantity = quantity;
-  //     updatedCart[index].total_price = prod.price * quantity;
-  //     setCart(updatedCart);
-  //   } else {
-  //     console.log("Error: couldn't update the cart");
-  //   }
-  // };
-
   const updateCart = () => {
     try {
       const updatedCart = [...cart];
@@ -52,19 +36,6 @@ export default function CartProduct({
     }
   };
 
-  {
-    /* this one doesnt work */
-  }
-  // const deleteProductFromCart = () => {
-  //   if (quantity === 0 && cart !== null && Array.isArray(cart)) {
-  //     const updatedCart: CartType = [...cart];
-  //     const index = updatedCart.findIndex(
-  //       (i) => i.product_id === prod.product_id && i.size == prod.size
-  //     );
-
-  {
-    /* this one doesnt work */
-  }
   const deleteProductFromCart = () => {
     if (quantity < 1) {
       console.log(cart[i]);
@@ -74,6 +45,10 @@ export default function CartProduct({
       console.log(updatedCart);
     }
   };
+
+  useEffect(() => {
+    setQuantity(cart[i].quantity);
+  }, [cart]);
 
   useEffect(() => {
     if (quantity > 0) {
@@ -97,10 +72,9 @@ export default function CartProduct({
           <SubText>{prod.size}</SubText>
         </Flex>
         <Flex className="justify-between items-center">
-          <Price
-            color="secondary"
-            font="normal"
-          >{`£ ${prod.total_price}`}</Price>
+          <Price color="secondary" font="normal">{`£ ${priceValidation(
+            prod.total_price
+          )}`}</Price>
           <Quantifier
             quantity={quantity}
             setQuantity={setQuantity}

@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.hidden-scrollbar::-webkit-scrollbar {
+  width: 0px;
+}
+
+.hidden-scrollbar::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 6px;
+}
+
 /* Style for the labels */
 .label-container {
   position: relative;

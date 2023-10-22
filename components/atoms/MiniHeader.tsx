@@ -9,7 +9,7 @@ export default function MiniHeader({
   ...props
 }: MiniHeaderType) {
   return (
-    <h3 {...props} className={`text-secondary font-${font} text-base`}>
+    <h3 {...props} className={`text-secondary font-${font} text-[15px]`}>
       {children}
     </h3>
   );

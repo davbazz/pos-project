@@ -12,7 +12,7 @@ export default function AltButton({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 text-[12px] rounded-[32px] ${
+      className={`px-4 py-2 text-[11px] rounded-[32px] ${
         children === onChoice
           ? "bg-secondary text-white"
           : "bg-transparent text-secondary border-[1px] border-linear hover:bg-alternative"

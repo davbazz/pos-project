@@ -13,7 +13,7 @@ export default function CartProductList() {
   };
 
   return (
-    <Flex className="flex-row flex-wrap">
+    <Flex className="flex-row flex-wrap overflow-y-scroll hidden-scrollbar">
       {cart && cart.map((prod, i) => <CartProduct prod={prod} i={i} key={i} />)}
       {cart === null && <EmptyCartMessage />}
     </Flex>
