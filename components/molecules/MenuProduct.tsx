@@ -49,7 +49,7 @@ export default function MenuProduct({
 
       <Flex className="flex-col">
         <Flex className="">
-          <MiniHeader>{product_name}</MiniHeader>
+          <MiniHeader font="semibold">{product_name}</MiniHeader>
           <SubText>{available ? "Available" : "Not Available"}</SubText>
         </Flex>
         <Flex className="">
@@ -62,7 +62,9 @@ export default function MenuProduct({
           {size.map((s, i) => (
             <Flex className="justify-between" key={i}>
               <AltButton>{s}</AltButton>
-              <Price>{price[i]}</Price>
+              <Price font="semibold" color="primary">
+                {price[i]}
+              </Price>
             </Flex>
           ))}
         </Flex>
