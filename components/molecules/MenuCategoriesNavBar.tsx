@@ -42,6 +42,14 @@ export default function MenuCategoriesNavBar() {
       console.log(error.message);
     }
 
+    const deleteCategory = async (name: string) => {
+      const { error } = await supabase
+        .from("menu_categories")
+        .delete()
+        .eq("name", name)
+        .eq("user_id", (await supabase.auth.getUser()).data.user?.id);
+    };
+
     // if there is a prev listing number, then add 1 to it
     if (prevListingNumber !== null && prevListingNumber.length > 0) {
       const newListingOrder = prevListingNumber[0].listing_order + 1;
@@ -112,9 +120,9 @@ export default function MenuCategoriesNavBar() {
   });
 
   return (
-    <Flex className="justify-center items-center gap-6">
+    <Flex className="w-full">
       {menuCategories === null || menuCategories.length === 0 ? (
-        <Flex className="">
+        <Flex className="items-center gap-3 overflow-x-scroll hidden-scrollbar">
           <MainButton
             cssSet="categorySet"
             onClick={() => setAddingNewCategory(true)}
@@ -125,7 +133,6 @@ export default function MenuCategoriesNavBar() {
             <CategoryInput
               type="text"
               placeholder="e.g Coffee"
-              className="removeOnOusideClick"
               value={newCaterory}
               onChange={(e) => setNewCategory(e.target.value)}
               onKeyDown={(e) => goOnEnter(e, addNewCategory)}
@@ -134,7 +141,7 @@ export default function MenuCategoriesNavBar() {
           )}
         </Flex>
       ) : (
-        <Flex className="">
+        <Flex className="items-center gap-3 overflow-x-scroll hidden-scrollbar">
           {menuCategories.map((cat, i) => (
             <MainButton
               cssSet="categorySet"
@@ -154,7 +161,6 @@ export default function MenuCategoriesNavBar() {
             <CategoryInput
               type="text"
               placeholder="e.g Coffee"
-              className="removeOnOusideClick"
               value={newCaterory}
               onChange={(e) => setNewCategory(e.target.value)}
               onKeyDown={(e) => goOnEnter(e, addNewCategory)}

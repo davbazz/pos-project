@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
 import { ProductWorkshopContext } from "@/components/providers/ProductWorkshopProvider";
 import type { ProductType } from "@/types/ProductType";
-import AltButton from "../atoms/AltButton";
+import MainButton from "../atoms/MainButton";
 
 export default function AddNewProductButton() {
   const { selectedCategory } = useContext(SelectedCategoryContext) as {
@@ -29,5 +29,9 @@ export default function AddNewProductButton() {
     setProductWorkshop(newProd);
   };
 
-  return <AltButton onClick={addNewProduct}>New product</AltButton>;
+  return (
+    <MainButton onClick={addNewProduct} cssSet="newProdSet">
+      New product
+    </MainButton>
+  );
 }

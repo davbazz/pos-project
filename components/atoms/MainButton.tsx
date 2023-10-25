@@ -3,7 +3,7 @@ import { SelectedCategoryContext } from "@/components/providers/SelectedCategory
 
 interface MainButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: string;
-  cssSet: "categorySet" | "cartSet" | "productSet" | "authSet";
+  cssSet: "categorySet" | "cartSet" | "productSet" | "authSet" | "newProdSet";
   onClick?: (e: any) => any;
 }
 
@@ -26,14 +26,18 @@ export default function MainButton({
 
   const productSet = `text-white bg-primary hover:bg-softPrimary px-6 py-2 text-sm w-[calc(65%-12px)]`;
 
+  const newProdSet = `text-sm px-6 py-[10px] bg-transparent text-secondary border-[1px] border-linear hover:bg-secondary hover:text-white duration-100`;
+
   // const authSet =
 
   return (
     <button
       onClick={onClick}
-      className={`rounded-[32px] ${cssSet === "categorySet" && categorySet} ${
-        cssSet === "cartSet" && cartSet
-      } ${cssSet === "productSet" && productSet}`}
+      className={`rounded-[32px] whitespace-nowrap ${
+        cssSet === "categorySet" && categorySet
+      } ${cssSet === "cartSet" && cartSet} ${
+        cssSet === "productSet" && productSet
+      } ${cssSet === "newProdSet" && newProdSet}`}
     >
       {children}
     </button>

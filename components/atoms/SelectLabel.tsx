@@ -1,6 +1,5 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { MenuCategoriesContext } from "@/components/providers/MenuCategoriesProvider";
-import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
 
 interface SelectLabelProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -16,23 +15,9 @@ export default function SelectLabel({
     menuCategories: string[];
   };
 
-  const { selectedCategory, setSelectedCategory } = useContext(
-    SelectedCategoryContext
-  ) as {
-    selectedCategory: string;
-    setSelectedCategory: (newCategory: string) => void;
-  };
-
-  useEffect(() => {
-    setCategory(selectedCategory);
-  }, [selectedCategory]);
-
   return (
     <div>
-      <select
-        value={category}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-      >
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
         {menuCategories?.map((c) => (
           <option key={c} value={c}>
             {c}

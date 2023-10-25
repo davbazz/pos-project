@@ -1,3 +1,7 @@
 export default function BZVLogo() {
-  return <h2 className="font-bold">QPOS</h2>;
+  return (
+    <h2 className="font-bold text-primary">
+      <span className="text-secondary">Q</span>POS
+    </h2>
+  );
 }

@@ -10,9 +10,15 @@ import ProductImg from "../atoms/ProductImg";
 import ProductWorkshopButton from "../atoms/ProductWorkshopButton";
 import Input from "../atoms/Input";
 import SelectLabel from "../atoms/SelectLabel";
+import LatteImg from "@/public/latte.jpeg";
+import MainHeader from "../atoms/MainHeader";
+import ImgIcon from "../svg's/ImgIcon";
+import FileInput from "../atoms/FIleInput";
 
 export default function MenuProductWorkshop() {
-  const [file, setFile] = useState<File | string>("");
+  const [file, setFile] = useState<File | null>(null);
+  const [newImg, setNewImg] = useState<string | null>(null);
+  const [fileInputKey, setFileInputKey] = useState<number>(0);
   const [uniqueID, setUniqueID] = useState<string>();
   const [available, setAvailable] = useState<boolean>(true);
   const [name, setName] = useState<string>("");
@@ -223,24 +229,26 @@ export default function MenuProductWorkshop() {
   };
 
   const updateImg = async () => {
-    const { data, error } = await supabase.storage
-      .from("product_img")
-      .update(
-        (await supabase.auth.getUser()).data.user!.id +
-          "/" +
-          productWorkshop.id,
-        file,
-        {
-          upsert: true,
-        }
-      );
-    if (error) {
-      console.log(error.message);
-      return error.message;
-    }
-    if (data) {
-      console.log("new img has been successfully updated");
-      console.log(data);
+    if (file) {
+      const { data, error } = await supabase.storage
+        .from("product_img")
+        .update(
+          (await supabase.auth.getUser()).data.user!.id +
+            "/" +
+            productWorkshop.id,
+          file,
+          {
+            upsert: true,
+          }
+        );
+      if (error) {
+        console.log(error.message);
+        return error.message;
+      }
+      if (data) {
+        console.log("new img has been successfully updated");
+        console.log(data);
+      }
     }
   };
 
@@ -302,6 +310,15 @@ export default function MenuProductWorkshop() {
   };
 
   useEffect(() => {
+    if (!file) {
+      return;
+    }
+    const objectUrl = URL.createObjectURL(file);
+    setNewImg(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [file]);
+
+  useEffect(() => {
     // set all the state variables from the product workshop
     setAvailable(productWorkshop?.available);
     setName(productWorkshop?.product_name);
@@ -317,24 +334,32 @@ export default function MenuProductWorkshop() {
     if (!productWorkshop?.id) {
       setUniqueID(uuidv4());
     }
+
+    // clear input field, img and file when choosing new prod or existing prod
+    setFile(null);
+    setNewImg(null);
+    setFileInputKey((prev) => prev + 1);
   }, [productWorkshop]);
 
   return (
-    <aside>
+    <aside className="fixed top-0 right-0 w-[280px] h-screen bg-white border-l-[1px] border-l-linear px-5 py-6 overflow-y-scroll">
       {productWorkshop && (
-        <Flex className="flex-col">
-          <ProductImg
-            src={
-              productWorkshop.img_url
-                ? productWorkshop.img_url
-                : process.env.NEXT_PUBLIC_PRODUCT_IMG_DEFAULT_LINK
-            }
-            alt={name}
-          />
-          <Input
-            type="file"
+        <Flex className="flex-col gap-5">
+          <MainHeader>Product</MainHeader>
+          <Flex className="w-full min-h-[150px] max-h-[150px] items-center justify-center overflow-hidden rounded-[32px]">
+            {newImg || productWorkshop.img_url ? (
+              <ProductImg
+                src={newImg ? newImg : productWorkshop.img_url}
+                alt={name}
+              />
+            ) : (
+              <ImgIcon />
+            )}
+          </Flex>
+          <FileInput
             id={`${productWorkshop.product_name} img`}
             onChange={(e) => setFile(e.target.files![0])}
+            fileInputKey={fileInputKey}
           />
           <SubText onClick={() => setAvailable(!available)}>
             {available ? "Available" : "Unavailable"}
@@ -395,10 +420,10 @@ export default function MenuProductWorkshop() {
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
           />
-          <ProductWorkshopButton onClick={checkProductID}>
+          <ProductWorkshopButton color="success" onClick={checkProductID}>
             Save
           </ProductWorkshopButton>
-          <ProductWorkshopButton onClick={handleDeleteProduct}>
+          <ProductWorkshopButton color="error" onClick={handleDeleteProduct}>
             Delete
           </ProductWorkshopButton>
         </Flex>

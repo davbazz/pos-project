@@ -59,90 +59,7 @@ export default function HomeProduct({
   }, [category_name]);
 
   return (
-    // <Flex className="rounded-2xl bg-white p-3 gap-5">
-    //   {/* <Flex className="flex-col justify-between items-center">
-    //     <Flex className="">
-    //       <ProductImg src={img_url} alt={product_name} />
-    //     </Flex>
-    //     <Flex className="">
-    //       <Quantifier
-    //         quantity={quantity}
-    //         setQuantity={setQuantity}
-    //         location="home product"
-    //       />
-    //     </Flex>
-    //   </Flex>
-
-    //   <Flex className="flex-col justify-between gap-3">
-    //     <Flex className="flex-col gap-3">
-    //       <Flex className="justify-start items-center gap-3">
-    //         <MiniHeader font="semibold">{product_name}</MiniHeader>
-    //         <Price
-    //           color="primary"
-    //           font="semibold"
-    //         >{`£ ${price[selectedSize]}`}</Price>
-    //       </Flex>
-    //       <SubText>{`"${description}"`}</SubText>
-    //     </Flex>
-    //     <Flex className="justify-between gap-2">
-    //       {size.map((s, i) => (
-    //         <AltButton
-    //           key={i}
-    //           onClick={() => setSelectedSize(size.indexOf(s))}
-    //           onChoice={size[selectedSize]}
-    //         >
-    //           {s}
-    //         </AltButton>
-    //       ))}
-    //     </Flex>
-    //     <MainButton onClick={addProdToCart} cssSet="productSet">
-    //       Add to cart
-    //     </MainButton>
-    //   </Flex> */}
-
-    //   <Flex className="flex-col gap-5">
-    //     <Flex className="justify-between gap-5">
-    //       <Flex className="rounded-2xl w-[50%]">
-    //         <ProductImg src={img_url} alt={product_name} />
-    //       </Flex>
-    //       <Flex className="flex-col justify-between gap-3">
-    //         <Flex className="flex-col gap-3">
-    //           <Flex className="justify-start items-center gap-3">
-    //             <MiniHeader font="semibold">{product_name}</MiniHeader>
-    //             <Price
-    //               color="primary"
-    //               font="semibold"
-    //             >{`£ ${price[selectedSize]}`}</Price>
-    //           </Flex>
-    //           <SubText>{`"${description}"`}</SubText>
-    //         </Flex>
-    //         <Flex className="justify-between gap-2">
-    //           {size.map((s, i) => (
-    //             <AltButton
-    //               key={i}
-    //               onClick={() => setSelectedSize(size.indexOf(s))}
-    //               onChoice={size[selectedSize]}
-    //             >
-    //               {s}
-    //             </AltButton>
-    //           ))}
-    //         </Flex>
-    //       </Flex>
-    //     </Flex>
-    //     <Flex className="justify-between items-center">
-    //       <Quantifier
-    //         quantity={quantity}
-    //         setQuantity={setQuantity}
-    //         location="home product"
-    //       />
-    //       <MainButton onClick={addProdToCart} cssSet="productSet">
-    //         Add to cart
-    //       </MainButton>
-    //     </Flex>
-    //   </Flex>
-    // </Flex>
-
-    <Flex className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(50%-8px)]">
+    <Flex className="rounded-2xl flex-col gap-3 bg-white p-3 w-[calc(50%-8px)] min-h-[220px]">
       <Flex className="justify-between gap-5 h-4/5">
         <Flex className="rounded-2xl w-[35%] h-full">
           <ProductImg src={img_url} alt={product_name} />
@@ -159,22 +76,26 @@ export default function HomeProduct({
             </Flex>
             <SubText>{`"${description}"`}</SubText>
           </Flex>
-          <Flex className="justify-start items-center gap-1 overflow-x-scroll text-secondary text-sm mt-2">
-            Size:
-            {size.map((s, i) => (
-              <AltButton
-                key={i}
-                onClick={() => setSelectedSize(size.indexOf(s))}
-                onChoice={size[selectedSize]}
-              >
-                {s}
-              </AltButton>
-            ))}
+          <Flex className="gap-2 items-center">
+            <MiniHeader font="normal" color="secondary">
+              Size:
+            </MiniHeader>
+            <Flex className="justify-start items-center gap-1 overflow-x-scroll hidden-scrollbar text-secondary text-sm -mb-4">
+              {size.map((s, i) => (
+                <AltButton
+                  key={i}
+                  onClick={() => setSelectedSize(size.indexOf(s))}
+                  onChoice={size[selectedSize]}
+                >
+                  {s}
+                </AltButton>
+              ))}
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
 
-      <Flex className="justify-between items-center h-1/5">
+      <Flex className="justify-between items-center gap-5 h-1/5">
         <Flex className="justify-center items-center w-[35%]">
           <Quantifier
             quantity={quantity}
@@ -188,51 +109,4 @@ export default function HomeProduct({
       </Flex>
     </Flex>
   );
-}
-
-{
-  /*
-<Flex className="rounded-2xl bg-white p-3">
-      <Flex className="flex-col gap-5">
-        <Flex className="justify-between gap-5">
-          <Flex className="rounded-2xl w-[50%]">
-            <ProductImg src={img_url} alt={product_name} />
-          </Flex>
-          <Flex className="flex-col justify-between gap-3">
-            <Flex className="flex-col gap-3">
-              <Flex className="justify-start items-center gap-3">
-                <MiniHeader font="semibold">{product_name}</MiniHeader>
-                <Price
-                  color="primary"
-                  font="semibold"
-                >{`£ ${price[selectedSize]}`}</Price>
-              </Flex>
-              <SubText>{`"${description}"`}</SubText>
-            </Flex>
-            <Flex className="justify-between gap-2">
-              {size.map((s, i) => (
-                <AltButton
-                  key={i}
-                  onClick={() => setSelectedSize(size.indexOf(s))}
-                  onChoice={size[selectedSize]}
-                >
-                  {s}
-                </AltButton>
-              ))}
-            </Flex>
-          </Flex>
-        </Flex>
-        <Flex className="justify-between items-center">
-          <Quantifier
-            quantity={quantity}
-            setQuantity={setQuantity}
-            location="home product"
-          />
-          <MainButton onClick={addProdToCart} cssSet="productSet">
-            Add to cart
-          </MainButton>
-        </Flex>
-      </Flex>
-    </Flex>
-*/
 }

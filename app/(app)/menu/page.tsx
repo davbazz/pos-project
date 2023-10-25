@@ -11,6 +11,7 @@ import Flex from "@/components/atoms/Flex";
 import MainHeader from "@/components/atoms/MainHeader";
 import MenuProductWorkshop from "@/components/organisms/MenuProductWorkshop";
 import AddNewProductButton from "@/components/molecules/AddNewProductButton";
+import Relative from "@/components/atoms/Relative";
 
 export default function Menu() {
   const { selectedCategory, setSelectedCategory } = useContext(
@@ -27,17 +28,17 @@ export default function Menu() {
   return (
     <ProductWorkshopProvider>
       <MenuProductListProvider>
-        <main>
-          <Flex className="flex-col">
+        <Relative>
+          <Flex className="flex-col gap-8 w-[calc(100%-280px)]">
             <MenuCategoriesNavBar />
-            <Flex className="justify-between">
+            <Flex className="justify-between items-center">
               <MainHeader>{selectedCategory}</MainHeader>
               {selectedCategory && <AddNewProductButton />}
             </Flex>
             <MenuProductList />
             <MenuProductWorkshop />
           </Flex>
-        </main>
+        </Relative>
       </MenuProductListProvider>
     </ProductWorkshopProvider>
   );
