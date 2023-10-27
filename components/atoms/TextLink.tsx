@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 interface TextLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  href: string;
-  children: React.ReactNode;
+  href: string
+  children: React.ReactNode
 }
 
 export default function TextLink({ href, children, ...props }: TextLinkProps) {
@@ -14,5 +14,5 @@ export default function TextLink({ href, children, ...props }: TextLinkProps) {
     >
       {children}
     </Link>
-  );
+  )
 }

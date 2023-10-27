@@ -1,22 +1,22 @@
-import { useState, createContext } from "react";
-import type { ProductType } from "@/types/ProductType";
+import { useState, createContext } from 'react'
+import type { ProductType } from '@/types/ProductType'
 
 interface MenuProductListContextType {
-  menuProductList: ProductType[] | null;
-  setMenuProductList: (newMenuProductList: ProductType[] | null) => void;
+  menuProductList: ProductType[] | null
+  setMenuProductList: (newMenuProductList: ProductType[] | null) => void
 }
 
 export const MenuProductListContext =
-  createContext<MenuProductListContextType | null>(null);
+  createContext<MenuProductListContextType | null>(null)
 
 export default function MenuProductListProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   const [menuProductList, setMenuProductList] = useState<ProductType[] | null>(
-    null
-  );
+    null,
+  )
 
   return (
     <MenuProductListContext.Provider
@@ -24,5 +24,5 @@ export default function MenuProductListProvider({
     >
       {children}
     </MenuProductListContext.Provider>
-  );
+  )
 }

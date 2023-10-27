@@ -1,32 +1,32 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { supabase } from "@/lib/clientSupabase";
-import { useRouter } from "next/navigation";
-import Flex from "../atoms/Flex";
-import GoOnEnter from "@/lib/goOnEnter";
-import InputLabel from "../atoms/InputLabel";
-import ErrorMessage from "../atoms/ErrorMessage";
-import AuthButton from "../atoms/AuthButton";
+import { useState } from 'react'
+import { supabase } from '@/lib/clientSupabase'
+import { useRouter } from 'next/navigation'
+import Flex from '../atoms/Flex'
+import GoOnEnter from '@/lib/goOnEnter'
+import InputLabel from '../atoms/InputLabel'
+import ErrorMessage from '../atoms/ErrorMessage'
+import AuthButton from '../atoms/AuthButton'
 
 export default function SignInForm() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>();
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>()
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleSignIn = async () => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    });
+    })
     if (!error) {
-      router.push("/home");
+      router.push('/home')
     } else {
-      setError(error.message);
+      setError(error.message)
     }
-  };
+  }
 
   return (
     <Flex className="flex-col gap-8">
@@ -56,5 +56,5 @@ export default function SignInForm() {
 
       <AuthButton onClick={handleSignIn}>Sign In</AuthButton>
     </Flex>
-  );
+  )
 }

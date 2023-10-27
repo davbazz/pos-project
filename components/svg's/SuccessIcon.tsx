@@ -1,4 +1,4 @@
-import Flex from "../atoms/Flex";
+import Flex from '../atoms/Flex'
 
 export default function SuccessIcon() {
   return (
@@ -32,5 +32,5 @@ export default function SuccessIcon() {
         </g>
       </svg>
     </Flex>
-  );
+  )
 }

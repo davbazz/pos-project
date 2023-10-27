@@ -1,19 +1,19 @@
-import { useState, createContext } from "react";
+import { useState, createContext } from 'react'
 
 interface MenuCategoriesContextType {
-  menuCategories: string[] | null;
-  setMenuCategories: (newMenuCategories: string[] | null) => void;
+  menuCategories: string[] | null
+  setMenuCategories: (newMenuCategories: string[] | null) => void
 }
 
 export const MenuCategoriesContext =
-  createContext<MenuCategoriesContextType | null>(null);
+  createContext<MenuCategoriesContextType | null>(null)
 
 export default function MenuCategoriesProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const [menuCategories, setMenuCategories] = useState<string[] | null>(null);
+  const [menuCategories, setMenuCategories] = useState<string[] | null>(null)
 
   return (
     <MenuCategoriesContext.Provider
@@ -21,5 +21,5 @@ export default function MenuCategoriesProvider({
     >
       {children}
     </MenuCategoriesContext.Provider>
-  );
+  )
 }

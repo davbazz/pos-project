@@ -1,4 +1,4 @@
-import Flex from "../atoms/Flex";
+import Flex from '../atoms/Flex'
 
 export default function CartIcon() {
   return (
@@ -16,5 +16,5 @@ export default function CartIcon() {
         </g>
       </svg>
     </Flex>
-  );
+  )
 }

@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/clientSupabase";
-import Flex from "../atoms/Flex";
-import SubText from "../atoms/SubText";
-import GoOnEnter from "@/lib/goOnEnter";
-import InputLabel from "../atoms/InputLabel";
-import ErrorMessage from "../atoms/ErrorMessage";
-import AuthButton from "../atoms/AuthButton";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/clientSupabase'
+import Flex from '../atoms/Flex'
+import SubText from '../atoms/SubText'
+import GoOnEnter from '@/lib/goOnEnter'
+import InputLabel from '../atoms/InputLabel'
+import ErrorMessage from '../atoms/ErrorMessage'
+import AuthButton from '../atoms/AuthButton'
 
 export default function SignUpForm() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>();
-  const [checkEmail, setCheckEmail] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string>()
+  const [checkEmail, setCheckEmail] = useState<boolean>(false)
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleSignUp = async () => {
     const { error } = await supabase.auth.signUp({
@@ -25,19 +25,19 @@ export default function SignUpForm() {
       options: {
         emailRedirectTo: `${location.origin}/sign-in`,
       },
-    });
+    })
     if (!error) {
-      setCheckEmail(true);
-      router.refresh();
+      setCheckEmail(true)
+      router.refresh()
     } else {
-      setError(error.message);
-      console.log(error);
+      setError(error.message)
+      console.log(error)
     }
-  };
+  }
 
   switch (checkEmail) {
     case true:
-      return <SubText>Check your email</SubText>;
+      return <SubText>Check your email</SubText>
     case false:
       return (
         <Flex className="flex-col gap-8">
@@ -66,6 +66,6 @@ export default function SignUpForm() {
 
           <AuthButton onClick={handleSignUp}>Sign In</AuthButton>
         </Flex>
-      );
+      )
   }
 }

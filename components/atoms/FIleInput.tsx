@@ -1,5 +1,5 @@
 interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  fileInputKey?: number;
+  fileInputKey?: number
 }
 
 export default function FileInput({ fileInputKey, ...props }: FileInputProps) {
@@ -10,5 +10,5 @@ export default function FileInput({ fileInputKey, ...props }: FileInputProps) {
       key={fileInputKey}
       {...props}
     />
-  );
+  )
 }

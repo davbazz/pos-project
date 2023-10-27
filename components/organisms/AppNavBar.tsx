@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import BZVLogo from "../svg's/BZVLogo";
-import Flex from "../atoms/Flex";
-import LogoutButton from "../atoms/LogoutButton";
-import MenuIconLink from "../molecules/MenuIconLink";
-import HistoryIconLink from "../molecules/HistoryIconLink";
-import HomeIconLink from "../molecules/HomeIconLink";
+import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import BZVLogo from "../svg's/BZVLogo"
+import Flex from '../atoms/Flex'
+import LogoutButton from '../atoms/LogoutButton'
+import MenuIconLink from '../molecules/MenuIconLink'
+import HistoryIconLink from '../molecules/HistoryIconLink'
+import HomeIconLink from '../molecules/HomeIconLink'
 
 export default function AppNavBar() {
-  const [selectedPath, setSelectedPath] = useState<string>("/home");
+  const [selectedPath, setSelectedPath] = useState<string>('/home')
 
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   useEffect(() => {
-    setSelectedPath(pathname);
-  }, [pathname]);
+    setSelectedPath(pathname)
+  }, [pathname])
 
   return (
     <aside className="fixed top-0 left-0 w-[170px] h-screen px-5 py-6 border-r-[1px] border-r-linear">
@@ -43,5 +43,5 @@ export default function AppNavBar() {
         <LogoutButton />
       </Flex>
     </aside>
-  );
+  )
 }

@@ -1,28 +1,28 @@
-"use client";
+'use client'
 
-import { useEffect, useContext } from "react";
-import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
-import { MenuCategoriesContext } from "../providers/MenuCategoriesProvider";
-import getAllMenuCategories from "@/lib/getAllMenuCategories";
-import Flex from "../atoms/Flex";
-import MainButton from "../atoms/MainButton";
-import RedirectToMenu from "./RedirectToMenu";
+import { useEffect, useContext } from 'react'
+import { SelectedCategoryContext } from '@/components/providers/SelectedCategoryProvider'
+import { MenuCategoriesContext } from '../providers/MenuCategoriesProvider'
+import getAllMenuCategories from '@/lib/getAllMenuCategories'
+import Flex from '../atoms/Flex'
+import MainButton from '../atoms/MainButton'
+import RedirectToMenu from './RedirectToMenu'
 
 export default function HomeCategoriesNavBar() {
   const { setSelectedCategory } = useContext(SelectedCategoryContext) as {
-    setSelectedCategory: (newCategory: string) => void;
-  };
+    setSelectedCategory: (newCategory: string) => void
+  }
 
   const { menuCategories, setMenuCategories } = useContext(
-    MenuCategoriesContext
+    MenuCategoriesContext,
   ) as {
-    menuCategories: string[];
-    setMenuCategories: (newCategories: string[]) => void;
-  };
+    menuCategories: string[]
+    setMenuCategories: (newCategories: string[]) => void
+  }
 
   useEffect(() => {
-    getAllMenuCategories({ setMenuCategories });
-  }, []);
+    getAllMenuCategories({ setMenuCategories })
+  }, [])
 
   return (
     <Flex className="justify-start overflow-x-scroll">
@@ -42,5 +42,5 @@ export default function HomeCategoriesNavBar() {
         <RedirectToMenu></RedirectToMenu>
       )}
     </Flex>
-  );
+  )
 }

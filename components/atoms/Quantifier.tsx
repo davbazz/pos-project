@@ -1,9 +1,9 @@
-import Flex from "./Flex";
+import Flex from './Flex'
 
 interface QuantifierProps {
-  location: string;
-  quantity: number;
-  setQuantity: (quantity: number) => void;
+  location: string
+  quantity: number
+  setQuantity: (quantity: number) => void
 }
 
 export default function Quantifier({
@@ -12,13 +12,13 @@ export default function Quantifier({
   location,
 }: QuantifierProps) {
   const decreaseQuantity = () => {
-    if (quantity > 1 && location === "home product") {
-      setQuantity(quantity - 1);
+    if (quantity > 1 && location === 'home product') {
+      setQuantity(quantity - 1)
     }
-    if (quantity > 0 && location === "cart") {
-      setQuantity(quantity - 1);
+    if (quantity > 0 && location === 'cart') {
+      setQuantity(quantity - 1)
     }
-  };
+  }
 
   return (
     <Flex className="gap-2">
@@ -58,5 +58,5 @@ export default function Quantifier({
         </svg>
       </Flex>
     </Flex>
-  );
+  )
 }

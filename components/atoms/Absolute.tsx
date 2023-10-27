@@ -1,7 +1,7 @@
 interface AbsoluteProps extends React.HTMLAttributes<HTMLDivElement> {
-  className: string;
-  children?: React.ReactNode;
-  onClick?: () => void;
+  className: string
+  children?: React.ReactNode
+  onClick?: () => void
 }
 
 export default function Absolute({
@@ -14,5 +14,5 @@ export default function Absolute({
     <div className={`absolute ${className}`} onClick={onClick} {...props}>
       {children}
     </div>
-  );
+  )
 }

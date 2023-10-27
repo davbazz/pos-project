@@ -1,19 +1,19 @@
-import { useState, createContext } from "react";
+import { useState, createContext } from 'react'
 
 interface SelectedCategoryContextType {
-  selectedCategory: string | null;
-  setSelectedCategory: (newSelectedCategory: string | null) => void;
+  selectedCategory: string | null
+  setSelectedCategory: (newSelectedCategory: string | null) => void
 }
 
 export const SelectedCategoryContext =
-  createContext<SelectedCategoryContextType | null>(null);
+  createContext<SelectedCategoryContextType | null>(null)
 
 export default function SelectedCategoryProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
   return (
     <SelectedCategoryContext.Provider
@@ -21,5 +21,5 @@ export default function SelectedCategoryProvider({
     >
       {children}
     </SelectedCategoryContext.Provider>
-  );
+  )
 }

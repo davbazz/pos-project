@@ -1,7 +1,7 @@
 export default function HomepageIcon({
   selectedPath,
 }: {
-  selectedPath: string;
+  selectedPath: string
 }) {
   return (
     <div className="w-8 h-8 text-center">
@@ -9,7 +9,7 @@ export default function HomepageIcon({
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 32 40"
         className={`w-full h-full mt-[2px] ${
-          selectedPath === "/home" ? "fill-primary" : "fill-secondary"
+          selectedPath === '/home' ? 'fill-primary' : 'fill-secondary'
         }`}
       >
         <g>
@@ -17,5 +17,5 @@ export default function HomepageIcon({
         </g>
       </svg>
     </div>
-  );
+  )
 }

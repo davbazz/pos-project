@@ -1,10 +1,10 @@
-import { supabase } from "./clientSupabase";
+import { supabase } from './clientSupabase'
 
 interface fetchProductsProps {
-  selectedCategory: string | null;
-  setProductList: (products: any) => void;
-  setNoProducts: (product: boolean) => void;
-  setErrorMessage: (error: string | null) => void;
+  selectedCategory: string | null
+  setProductList: (products: any) => void
+  setNoProducts: (product: boolean) => void
+  setErrorMessage: (error: string | null) => void
 }
 
 export default async function fetchHomeProducts({
@@ -14,24 +14,24 @@ export default async function fetchHomeProducts({
   setErrorMessage,
 }: fetchProductsProps) {
   const { data: products, error } = await supabase
-    .from("menu_products")
+    .from('menu_products')
     .select(
-      "id, product_name, category_name, price, description, size, img_url, listing_order"
+      'id, product_name, category_name, price, description, size, img_url, listing_order',
     )
-    .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
-    .eq("category_name", selectedCategory)
-    .eq("available", true)
-    .order("listing_order", { ascending: true });
+    .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
+    .eq('category_name', selectedCategory)
+    .eq('available', true)
+    .order('listing_order', { ascending: true })
 
   if (!error) {
-    setErrorMessage(null);
+    setErrorMessage(null)
 
     if (products.length > 0) {
-      return setNoProducts(false), setProductList(products);
+      return setNoProducts(false), setProductList(products)
     } else {
-      return setProductList(null), setNoProducts(true);
+      return setProductList(null), setNoProducts(true)
     }
   } else {
-    return setErrorMessage(error.message);
+    return setErrorMessage(error.message)
   }
 }

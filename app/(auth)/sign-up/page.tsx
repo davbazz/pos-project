@@ -1,9 +1,9 @@
-import MainHeader from "@/components/atoms/MainHeader";
-import SubText from "@/components/atoms/SubText";
-import TextLink from "@/components/atoms/TextLink";
-import SignUpForm from "@/components/organisms/SignUpForm";
-import Flex from "@/components/atoms/Flex";
-import BZVLogo from "@/components/svg's/BZVLogo";
+import MainHeader from '@/components/atoms/MainHeader'
+import SubText from '@/components/atoms/SubText'
+import TextLink from '@/components/atoms/TextLink'
+import SignUpForm from '@/components/organisms/SignUpForm'
+import Flex from '@/components/atoms/Flex'
+import BZVLogo from "@/components/svg's/BZVLogo"
 
 export default function SignUp() {
   return (
@@ -20,12 +20,12 @@ export default function SignUp() {
             <TextLink href="/sign-in">
               <span className="text-secondary/70">
                 Already have an account?
-              </span>{" "}
+              </span>{' '}
               Sign in now
             </TextLink>
           </Flex>
         </Flex>
       </Flex>
     </div>
-  );
+  )
 }

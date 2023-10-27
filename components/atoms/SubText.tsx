@@ -1,6 +1,6 @@
 interface SubTextType extends React.HTMLAttributes<HTMLParagraphElement> {
-  children: React.ReactNode;
-  onClick?: () => void;
+  children: React.ReactNode
+  onClick?: () => void
 }
 
 export default function SubText({ children, ...props }: SubTextType) {
@@ -8,5 +8,5 @@ export default function SubText({ children, ...props }: SubTextType) {
     <p className="text-[12px] text-softSecondary" {...props}>
       {children}
     </p>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import MainScreen from "@/components/organisms/MainScreen";
-import AppNavBar from "@/components/organisms/AppNavBar";
-import Relative from "@/components/atoms/Relative";
+import MainScreen from '@/components/organisms/MainScreen'
+import AppNavBar from '@/components/organisms/AppNavBar'
+import Relative from '@/components/atoms/Relative'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,5 +8,5 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <AppNavBar />
       <MainScreen children={children} />
     </Relative>
-  );
+  )
 }

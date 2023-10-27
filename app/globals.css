@@ -35,3 +35,10 @@
   border: 1px solid #ccc; /* Add a border for the input */
   border-radius: 4px; /* Add border-radius for rounded corners */
 }
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}

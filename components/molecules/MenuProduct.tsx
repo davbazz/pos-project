@@ -1,13 +1,13 @@
-import { supabase } from "@/lib/clientSupabase";
-import { useContext } from "react";
-import { ProductWorkshopContext } from "../providers/ProductWorkshopProvider";
-import type { ProductType } from "@/types/ProductType";
-import AltButton from "../atoms/AltButton";
-import Flex from "../atoms/Flex";
-import MiniHeader from "../atoms/MiniHeader";
-import Price from "../atoms/Price";
-import ProductImg from "../atoms/ProductImg";
-import SubText from "../atoms/SubText";
+import { supabase } from '@/lib/clientSupabase'
+import { useContext } from 'react'
+import { ProductWorkshopContext } from '../providers/ProductWorkshopProvider'
+import type { ProductType } from '@/types/ProductType'
+import AltButton from '../atoms/AltButton'
+import Flex from '../atoms/Flex'
+import MiniHeader from '../atoms/MiniHeader'
+import Price from '../atoms/Price'
+import ProductImg from '../atoms/ProductImg'
+import SubText from '../atoms/SubText'
 
 export default function MenuProduct({
   id,
@@ -21,8 +21,8 @@ export default function MenuProduct({
   ingredients,
 }: ProductType) {
   const { setProductWorkshop } = useContext(ProductWorkshopContext) as {
-    setProductWorkshop: (newCart: ProductType) => void;
-  };
+    setProductWorkshop: (newCart: ProductType) => void
+  }
 
   const useProduct = async () => {
     const prod = {
@@ -36,10 +36,10 @@ export default function MenuProduct({
       img_url: img_url,
       ingredients: ingredients,
       available: available,
-    };
-    console.log(prod);
-    setProductWorkshop(prod);
-  };
+    }
+    console.log(prod)
+    setProductWorkshop(prod)
+  }
 
   return (
     <Flex className="justify-between" onClick={useProduct}>
@@ -50,7 +50,7 @@ export default function MenuProduct({
       <Flex className="flex-col">
         <Flex className="">
           <MiniHeader font="semibold">{product_name}</MiniHeader>
-          <SubText>{available ? "Available" : "Not Available"}</SubText>
+          <SubText>{available ? 'Available' : 'Unavailable'}</SubText>
         </Flex>
         <Flex className="">
           <SubText>{description}</SubText>
@@ -70,5 +70,5 @@ export default function MenuProduct({
         </Flex>
       </Flex>
     </Flex>
-  );
+  )
 }

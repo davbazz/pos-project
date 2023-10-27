@@ -1,63 +1,63 @@
-import { useState, useEffect, useContext } from "react";
-import { CartContext } from "../providers/CartProvider";
-import { CartItemType } from "@/types/CartType";
-import { CartType } from "@/types/CartType";
-import Flex from "../atoms/Flex";
-import Price from "../atoms/Price";
-import ProductImg from "../atoms/ProductImg";
-import Quantifier from "../atoms/Quantifier";
-import SubText from "../atoms/SubText";
-import MiniHeader from "../atoms/MiniHeader";
-import priceValidation from "@/lib/priceValidation";
+import { useState, useEffect, useContext } from 'react'
+import { CartContext } from '../providers/CartProvider'
+import { CartItemType } from '@/types/CartType'
+import { CartType } from '@/types/CartType'
+import Flex from '../atoms/Flex'
+import Price from '../atoms/Price'
+import ProductImg from '../atoms/ProductImg'
+import Quantifier from '../atoms/Quantifier'
+import SubText from '../atoms/SubText'
+import MiniHeader from '../atoms/MiniHeader'
+import priceValidation from '@/lib/priceValidation'
 
 export default function CartProduct({
   prod,
   i,
 }: {
-  prod: CartItemType;
-  i: number;
+  prod: CartItemType
+  i: number
 }) {
-  const [quantity, setQuantity] = useState<number>(prod.quantity);
+  const [quantity, setQuantity] = useState<number>(prod.quantity)
 
   const { cart, setCart } = useContext(CartContext) as {
-    cart: CartType;
-    setCart: (newCart: any) => void;
-  };
+    cart: CartType
+    setCart: (newCart: any) => void
+  }
 
   const updateCart = () => {
     try {
-      const updatedCart = [...cart];
-      updatedCart[i].quantity = quantity;
-      updatedCart[i].total_price = prod.price * quantity;
-      setCart(updatedCart);
-      console.log(updatedCart);
+      const updatedCart = [...cart]
+      updatedCart[i].quantity = quantity
+      updatedCart[i].total_price = prod.price * quantity
+      setCart(updatedCart)
+      console.log(updatedCart)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const deleteProductFromCart = () => {
     if (quantity < 1) {
-      console.log(cart[i]);
-      const updatedCart = [...cart];
-      updatedCart.splice(i, 1);
-      setCart(updatedCart);
-      console.log(updatedCart);
+      console.log(cart[i])
+      const updatedCart = [...cart]
+      updatedCart.splice(i, 1)
+      setCart(updatedCart)
+      console.log(updatedCart)
     }
-  };
+  }
 
   useEffect(() => {
-    setQuantity(cart[i].quantity);
-  }, [cart]);
+    setQuantity(cart[i].quantity)
+  }, [cart])
 
   useEffect(() => {
     if (quantity > 0) {
-      updateCart();
+      updateCart()
     }
     if (quantity === 0) {
-      deleteProductFromCart();
+      deleteProductFromCart()
     }
-  }, [quantity]);
+  }, [quantity])
 
   return (
     <Flex
@@ -73,7 +73,7 @@ export default function CartProduct({
         </Flex>
         <Flex className="justify-between items-center">
           <Price color="secondary" font="normal">{`£ ${priceValidation(
-            prod.total_price
+            prod.total_price,
           )}`}</Price>
           <Quantifier
             quantity={quantity}
@@ -83,5 +83,5 @@ export default function CartProduct({
         </Flex>
       </Flex>
     </Flex>
-  );
+  )
 }

@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import { useEffect, useState, useContext } from "react";
-import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
-import type { ProductType } from "@/types/ProductType";
-import fetchHomeProducts from "@/lib/fetchHomeProducts";
-import Flex from "../atoms/Flex";
-import HomeProduct from "../molecules/HomeProduct";
-import SubText from "../atoms/SubText";
-import AltButton from "../atoms/AltButton";
-import RedirectToMenu from "../molecules/RedirectToMenu";
+import { useEffect, useState, useContext } from 'react'
+import { SelectedCategoryContext } from '@/components/providers/SelectedCategoryProvider'
+import type { ProductType } from '@/types/ProductType'
+import fetchHomeProducts from '@/lib/fetchHomeProducts'
+import Flex from '../atoms/Flex'
+import HomeProduct from '../molecules/HomeProduct'
+import SubText from '../atoms/SubText'
+import AltButton from '../atoms/AltButton'
+import RedirectToMenu from '../molecules/RedirectToMenu'
 
 export default function HomeProductList() {
-  const [productList, setProductList] = useState<ProductType[] | null>(null);
-  const [noProducts, setNoProducts] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [productList, setProductList] = useState<ProductType[] | null>(null)
+  const [noProducts, setNoProducts] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const { selectedCategory } = useContext(SelectedCategoryContext) as {
-    selectedCategory: string;
-  };
+    selectedCategory: string
+  }
 
   useEffect(() => {
     fetchHomeProducts({
@@ -25,8 +25,8 @@ export default function HomeProductList() {
       setProductList,
       setNoProducts,
       setErrorMessage,
-    });
-  }, [selectedCategory]);
+    })
+  }, [selectedCategory])
 
   return (
     <Flex className="flex-wrap gap-4 w-full">
@@ -65,5 +65,5 @@ export default function HomeProductList() {
         </Flex>
       )}
     </Flex>
-  );
+  )
 }

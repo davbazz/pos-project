@@ -1,15 +1,15 @@
-import { useState, useContext, useEffect } from "react";
-import { CartContext } from "@/components/providers/CartProvider";
-import type { CartType, CartItemType } from "@/types/CartType";
-import type { ProductType } from "@/types/ProductType";
-import AltButton from "../atoms/AltButton";
-import Flex from "../atoms/Flex";
-import MiniHeader from "../atoms/MiniHeader";
-import Price from "../atoms/Price";
-import ProductImg from "../atoms/ProductImg";
-import SubText from "../atoms/SubText";
-import MainButton from "../atoms/MainButton";
-import Quantifier from "../atoms/Quantifier";
+import { useState, useContext, useEffect } from 'react'
+import { CartContext } from '@/components/providers/CartProvider'
+import type { CartType, CartItemType } from '@/types/CartType'
+import type { ProductType } from '@/types/ProductType'
+import AltButton from '../atoms/AltButton'
+import Flex from '../atoms/Flex'
+import MiniHeader from '../atoms/MiniHeader'
+import Price from '../atoms/Price'
+import ProductImg from '../atoms/ProductImg'
+import SubText from '../atoms/SubText'
+import MainButton from '../atoms/MainButton'
+import Quantifier from '../atoms/Quantifier'
 
 export default function HomeProduct({
   id,
@@ -20,13 +20,13 @@ export default function HomeProduct({
   size,
   img_url,
 }: ProductType) {
-  const [selectedSize, setSelectedSize] = useState<number>(0);
-  const [quantity, setQuantity] = useState<number>(1);
+  const [selectedSize, setSelectedSize] = useState<number>(0)
+  const [quantity, setQuantity] = useState<number>(1)
 
   const { cart, setCart } = useContext(CartContext) as {
-    cart: CartType;
-    setCart: (newCart: any) => void;
-  };
+    cart: CartType
+    setCart: (newCart: any) => void
+  }
 
   const addProdToCart = () => {
     const newProd: CartItemType = {
@@ -38,25 +38,25 @@ export default function HomeProduct({
       size: size[selectedSize],
       price: price[selectedSize],
       total_price: price[selectedSize] * quantity,
-    };
+    }
 
     setCart((prevCart: CartType | null) => {
       if (prevCart === null) {
-        return [newProd];
+        return [newProd]
       }
-      return [...prevCart, newProd];
-    });
+      return [...prevCart, newProd]
+    })
 
-    display();
-  };
+    display()
+  }
 
   const display = () => {
-    console.log(cart);
-  };
+    console.log(cart)
+  }
 
   useEffect(() => {
-    setQuantity(1);
-  }, [category_name]);
+    setQuantity(1)
+  }, [category_name])
 
   return (
     <Flex className="rounded-2xl flex-col gap-3 bg-white p-3 w-[calc(50%-8px)] min-h-[220px]">
@@ -108,5 +108,5 @@ export default function HomeProduct({
         </MainButton>
       </Flex>
     </Flex>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 interface RelativeProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string;
-  children?: React.ReactNode;
-  onClick?: () => void;
+  className?: string
+  children?: React.ReactNode
+  onClick?: () => void
 }
 
 export default function Relative({
@@ -18,5 +18,5 @@ export default function Relative({
     >
       {children}
     </div>
-  );
+  )
 }

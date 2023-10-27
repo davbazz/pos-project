@@ -1,6 +1,6 @@
-import CartIcon from "../svg's/CartIcon";
-import Flex from "./Flex";
-import SubText from "./SubText";
+import CartIcon from "../svg's/CartIcon"
+import Flex from './Flex'
+import SubText from './SubText'
 
 export default function EmptyCartMessage() {
   return (
@@ -8,5 +8,5 @@ export default function EmptyCartMessage() {
       <CartIcon />
       <SubText>The cart is empty</SubText>
     </Flex>
-  );
+  )
 }

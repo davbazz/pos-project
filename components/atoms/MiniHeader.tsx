@@ -1,6 +1,6 @@
 interface MiniHeaderType extends React.HTMLAttributes<HTMLHeadingElement> {
-  children: React.ReactNode;
-  font: "normal" | "semibold";
+  children: React.ReactNode
+  font: 'normal' | 'semibold'
 }
 
 export default function MiniHeader({
@@ -12,5 +12,5 @@ export default function MiniHeader({
     <h3 {...props} className={`text-secondary font-${font} text-[15px]`}>
       {children}
     </h3>
-  );
+  )
 }

@@ -1,18 +1,18 @@
-import "./globals.css";
-import { Open_Sans } from "next/font/google";
-import type { Metadata } from "next";
+import './globals.css'
+import { Open_Sans } from 'next/font/google'
+import type { Metadata } from 'next'
 
-const font = Open_Sans({ subsets: ["latin"] });
+const font = Open_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "QPOS",
-  description: "QRCode based POS system",
-};
+  title: 'QPOS',
+  description: 'QRCode based POS system',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en" className={font.className}>
@@ -23,5 +23,5 @@ export default function RootLayout({
         </aside>
       </body>
     </html>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import Flex from "../atoms/Flex";
+import Flex from '../atoms/Flex'
 
 export default function ImgIcon() {
   return (
@@ -21,5 +21,5 @@ export default function ImgIcon() {
         />
       </svg>
     </Flex>
-  );
+  )
 }

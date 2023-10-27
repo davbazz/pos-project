@@ -1,6 +1,6 @@
 interface AuthButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: string | number;
-  onClick?: (e: any) => any;
+  children: string | number
+  onClick?: (e: any) => any
 }
 
 export default function AuthButton({ children, onClick }: AuthButtonProps) {
@@ -11,5 +11,5 @@ export default function AuthButton({ children, onClick }: AuthButtonProps) {
     >
       {children}
     </button>
-  );
+  )
 }

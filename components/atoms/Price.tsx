@@ -1,7 +1,7 @@
 interface PriceType extends React.HTMLProps<HTMLParagraphElement> {
-  children: number | string;
-  color: "primary" | "secondary";
-  font: "normal" | "semibold";
+  children: number | string
+  color: 'primary' | 'secondary'
+  font: 'normal' | 'semibold'
 }
 
 export default function Price({ children, color, font, ...props }: PriceType) {
@@ -9,5 +9,5 @@ export default function Price({ children, color, font, ...props }: PriceType) {
     <p {...props} className={`text-${color} font-${font} text-sm`}>
       {children}
     </p>
-  );
+  )
 }

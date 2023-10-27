@@ -1,29 +1,29 @@
-"use client";
+'use client'
 
-import { useEffect, useContext } from "react";
-import { SelectedCategoryContext } from "@/components/providers/SelectedCategoryProvider";
-import ProductWorkshopProvider from "@/components/providers/ProductWorkshopProvider";
-import MenuProductListProvider from "@/components/providers/MenuProductListProvider";
-import selectInitialCategory from "@/lib/selectInitialCategory";
-import MenuCategoriesNavBar from "@/components/molecules/MenuCategoriesNavBar";
-import MenuProductList from "@/components/organisms/MenuProductList";
-import Flex from "@/components/atoms/Flex";
-import MainHeader from "@/components/atoms/MainHeader";
-import MenuProductWorkshop from "@/components/organisms/MenuProductWorkshop";
-import AddNewProductButton from "@/components/molecules/AddNewProductButton";
-import Relative from "@/components/atoms/Relative";
+import { useEffect, useContext } from 'react'
+import { SelectedCategoryContext } from '@/components/providers/SelectedCategoryProvider'
+import ProductWorkshopProvider from '@/components/providers/ProductWorkshopProvider'
+import MenuProductListProvider from '@/components/providers/MenuProductListProvider'
+import selectInitialCategory from '@/lib/selectInitialCategory'
+import MenuCategoriesNavBar from '@/components/molecules/MenuCategoriesNavBar'
+import MenuProductList from '@/components/organisms/MenuProductList'
+import Flex from '@/components/atoms/Flex'
+import MainHeader from '@/components/atoms/MainHeader'
+import MenuProductWorkshop from '@/components/organisms/MenuProductWorkshop'
+import AddNewProductButton from '@/components/molecules/AddNewProductButton'
+import Relative from '@/components/atoms/Relative'
 
 export default function Menu() {
   const { selectedCategory, setSelectedCategory } = useContext(
-    SelectedCategoryContext
+    SelectedCategoryContext,
   ) as {
-    selectedCategory: string;
-    setSelectedCategory: (newCategory: string) => void;
-  };
+    selectedCategory: string
+    setSelectedCategory: (newCategory: string) => void
+  }
 
   useEffect(() => {
-    selectInitialCategory({ setSelectedCategory });
-  }, []);
+    selectInitialCategory({ setSelectedCategory })
+  }, [])
 
   return (
     <ProductWorkshopProvider>
@@ -41,5 +41,5 @@ export default function Menu() {
         </Relative>
       </MenuProductListProvider>
     </ProductWorkshopProvider>
-  );
+  )
 }
