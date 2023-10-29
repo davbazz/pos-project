@@ -43,10 +43,10 @@ export default function MenuProduct({
 
   return (
     <Flex
-      className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(33%-11px)] h-[450px] overflow-y-scroll hidden-scrollbar"
+      className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(33%-11px)] h-[460px] overflow-y-scroll hidden-scrollbar"
       onClick={useProduct}
     >
-      <Flex className="h-2/5">
+      <Flex className="min-h-[160px] max-h-[160px]">
         <ProductImg src={img_url} alt={product_name} />
       </Flex>
 
