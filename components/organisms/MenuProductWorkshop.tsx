@@ -38,7 +38,7 @@ export default function MenuProductWorkshop() {
     ProductWorkshopContext,
   ) as {
     productWorkshop: ProductType
-    setProductWorkshop: (prod: ProductType) => void
+    setProductWorkshop: (prod: ProductType | null) => void
   }
 
   // set size to input value
@@ -94,20 +94,20 @@ export default function MenuProductWorkshop() {
   }
 
   // set product workshop to zero value
-  const setProductWorkshopToZeroValue = async () => {
-    const newProd = {
-      product_name: '',
-      category_name: category,
-      user_id: (await supabase.auth.getUser()).data.user?.id,
-      description: '',
-      price: [0],
-      size: [''],
-      img_url: '',
-      ingredients: '',
-      available: true,
-    }
-    setProductWorkshop(newProd)
-  }
+  // const setProductWorkshopToZeroValue = async () => {
+  //   const newProd = {
+  //     product_name: '',
+  //     category_name: category,
+  //     user_id: (await supabase.auth.getUser()).data.user?.id,
+  //     description: '',
+  //     price: [0],
+  //     size: [''],
+  //     img_url: '',
+  //     ingredients: '',
+  //     available: true,
+  //   }
+  //   setProductWorkshop(newProd)
+  // }
 
   // check on which function to fire (create or update) based on existense of product ID
   const checkProductID = () => {
@@ -125,7 +125,7 @@ export default function MenuProductWorkshop() {
     await uploadImg()
     await listingOrder()
     await createProduct()
-    await setProductWorkshopToZeroValue()
+    setProductWorkshop(null)
   }
 
   // upload new img and return a link for it
@@ -233,7 +233,7 @@ export default function MenuProductWorkshop() {
       updateImg()
     }
 
-    await setProductWorkshopToZeroValue()
+    setProductWorkshop(null)
   }
 
   const updateImg = async () => {
@@ -280,7 +280,7 @@ export default function MenuProductWorkshop() {
   const handleDeleteProduct = async () => {
     await deleteProduct()
     await deleteImg()
-    await setProductWorkshopToZeroValue()
+    setProductWorkshop(null)
   }
 
   const deleteProduct = async () => {
@@ -325,6 +325,8 @@ export default function MenuProductWorkshop() {
     setNewImg(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
   }, [file])
+
+  useEffect(() => {}, [])
 
   useEffect(() => {
     // set all the state variables from the product workshop
