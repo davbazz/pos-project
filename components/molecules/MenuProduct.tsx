@@ -42,26 +42,40 @@ export default function MenuProduct({
   }
 
   return (
-    <Flex className="justify-between" onClick={useProduct}>
-      <Flex className="">
+    <Flex
+      className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(33%-11px)] h-[450px] overflow-y-scroll hidden-scrollbar"
+      onClick={useProduct}
+    >
+      <Flex className="h-2/5">
         <ProductImg src={img_url} alt={product_name} />
       </Flex>
 
-      <Flex className="flex-col">
-        <Flex className="">
+      <Flex className="flex-col h-3/5 gap-2">
+        <Flex className="justify-between items-center">
           <MiniHeader font="semibold">{product_name}</MiniHeader>
-          <SubText>{available ? 'Available' : 'Unavailable'}</SubText>
-        </Flex>
-        <Flex className="">
-          <SubText>{description}</SubText>
-        </Flex>
-        <Flex className="">
-          <SubText>{ingredients}</SubText>
+          <Flex
+            className={`rounded-md justify-center py-1 px-2 text-[12px] ${
+              available
+                ? 'bg-success/10 text-success'
+                : 'bg-error/10 text-error'
+            }`}
+          >
+            {available ? 'Available' : 'Unavailable'}
+          </Flex>
         </Flex>
         <Flex className="flex-col">
+          <span className="text-secondary mr-1 text-[12px]">Description:</span>
+          <SubText>{description}</SubText>
+        </Flex>
+        <Flex className="flex-col">
+          <span className="text-secondary mr-1 text-[12px]">Ingredients:</span>
+          <SubText>{ingredients}</SubText>
+        </Flex>
+        <Flex className="flex-col gap-1 text-[12px] text-secondary">
+          Sizes:
           {size.map((s, i) => (
-            <Flex className="justify-between" key={i}>
-              <AltButton>{s}</AltButton>
+            <Flex className="justify-between items-center" key={i}>
+              <SubText>{s}</SubText>
               <Price font="semibold" color="primary">
                 {price[i]}
               </Price>

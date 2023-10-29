@@ -23,21 +23,6 @@ export default function productList() {
     setProductWorkshop: (newProd: ProductType | null) => void
   }
 
-  // const setWorkshopToDefault = async () => {
-  //   const newProd = {
-  //     product_name: '',
-  //     category_name: selectedCategory,
-  //     user_id: (await supabase.auth.getUser()).data.user?.id,
-  //     description: '',
-  //     price: [0],
-  //     size: [''],
-  //     img_url: '',
-  //     ingredients: '',
-  //     available: true,
-  //   }
-  //   setProductWorkshop(newProd)
-  // }
-
   const fetchMenuProducts = async () => {
     const { data: products, error } = await supabase
       .from('menu_products')
@@ -88,7 +73,7 @@ export default function productList() {
   }, [selectedCategory])
 
   return (
-    <Flex className="gap-4">
+    <Flex className="flex-wrap gap-4 w-full">
       {productList?.map((product, i) => (
         <MenuProduct
           key={i}

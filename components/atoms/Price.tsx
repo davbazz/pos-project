@@ -1,6 +1,6 @@
 interface PriceType extends React.HTMLProps<HTMLParagraphElement> {
   children: number | string
-  color: 'primary' | 'secondary'
+  color: 'primary' | 'secondary' | 'softSecondary'
   font: 'normal' | 'semibold'
 }
 
