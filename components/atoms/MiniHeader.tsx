@@ -9,7 +9,10 @@ export default function MiniHeader({
   ...props
 }: MiniHeaderType) {
   return (
-    <h3 {...props} className={`text-secondary font-${font} text-[15px]`}>
+    <h3
+      {...props}
+      className={`text-secondary font-${font} text-[15px] whitespace-nowrap`}
+    >
       {children}
     </h3>
   )

@@ -59,7 +59,7 @@ export default function HomeProduct({
   }, [category_name])
 
   return (
-    <Flex className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(50%-8px)] min-h-[210px]">
+    <Flex className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(50%-8px)] xl:w-[calc(33%-11px)] min-h-[210px]">
       <Flex className="justify-between gap-5 h-4/5">
         <Flex className="rounded-2xl w-[35%] h-full">
           <ProductImg src={img_url} alt={product_name} />

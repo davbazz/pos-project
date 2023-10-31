@@ -107,6 +107,7 @@ export default function Cart() {
       .from('order_history')
       .select('id')
       .order('id', { ascending: false })
+      .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
       .limit(1)
 
     if (error) {

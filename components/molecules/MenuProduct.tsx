@@ -43,7 +43,7 @@ export default function MenuProduct({
 
   return (
     <Flex
-      className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(33%-11px)] h-[450px] overflow-y-scroll hidden-scrollbar"
+      className="rounded-2xl flex-col gap-5 bg-white p-3 w-[calc(33%-11px)] xl:w-[calc(25%-12px)] h-[430px] xl:h-[450px] overflow-y-scroll hidden-scrollbar"
       onClick={useProduct}
     >
       <Flex className="min-h-[160px] max-h-[160px]">
@@ -51,7 +51,7 @@ export default function MenuProduct({
       </Flex>
 
       <Flex className="flex-col h-3/5 gap-2">
-        <Flex className="justify-between items-center">
+        <Flex className="justify-between items-center flex-wrap gap-1">
           <MiniHeader font="semibold">{product_name}</MiniHeader>
           <Flex
             className={`rounded-md justify-center py-1 px-2 text-[12px] ${

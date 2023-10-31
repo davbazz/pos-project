@@ -85,14 +85,16 @@ export default function History() {
             endIndex={endIndex}
           />
         </Flex>
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+        {history !== null && history.length !== 0 && (
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
 
         {!history && <SubText>Loading...</SubText>}
-        {history && history.length === 0 && <p>No history</p>}
+        {history && history.length === 0 && <SubText>No history</SubText>}
       </Flex>
     </Relative>
   )
