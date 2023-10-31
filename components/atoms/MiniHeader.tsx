@@ -1,6 +1,6 @@
 interface MiniHeaderType extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode
-  font: 'normal' | 'semibold'
+  font: 'normal' | 'semibold' | 'bold'
 }
 
 export default function MiniHeader({

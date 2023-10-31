@@ -18,10 +18,11 @@ import priceValidation from '@/lib/priceValidation'
 import SuccessfulOrderPlacement from '../molecules/SuccessfulOrderPlacement'
 
 export default function Cart() {
-  const [options, setOptions] = useState<string[] | null>()
-  const [selectedOption, setSelectedOption] = useState<string>('')
+  const [selectedOption, setSelectedOption] = useState<string>('Dine In')
   const [orderId, setOrderId] = useState<number | null>(null)
   const [orderPlaced, setOrderPlaced] = useState<boolean>(false)
+
+  const options = ['Dine In', 'Delivery', 'Take Away']
 
   const { order, setOrder } = useContext(OrderContext) as {
     order: OrderType
@@ -31,21 +32,6 @@ export default function Cart() {
   const { cart, setCart } = useContext(CartContext) as {
     cart: CartType
     setCart: (newCart: null) => void
-  }
-
-  const fetchOrderOptions = async () => {
-    const { data: options, error } = await supabase
-      .from('order_options')
-      .select('options')
-      .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
-
-    if (error) {
-      console.error(error.message)
-    }
-    if (options != null && options.length > 0) {
-      setOptions(options[0].options)
-      setSelectedOption(options[0].options[0])
-    }
   }
 
   const handleQuantity: number =
@@ -58,6 +44,12 @@ export default function Cart() {
       return accumulator + product.total_price
     }, 0) || 0
 
+  const randomStatus = () => {
+    const statuses = ['pending', 'settled', 'cancelled']
+    const randomIndex = Math.floor(Math.random() * statuses.length)
+    return statuses[randomIndex]
+  }
+
   const updateOrder = async () => {
     const updatedOrder = {
       user_id: (await supabase.auth.getUser()).data.user?.id,
@@ -65,7 +57,7 @@ export default function Cart() {
       order_option: selectedOption,
       total_price: totalPrice,
       products: cart,
-      status: 'pending',
+      status: randomStatus(),
     }
 
     if (
@@ -131,8 +123,9 @@ export default function Cart() {
   }, [cart])
 
   useEffect(() => {
-    fetchOrderOptions()
-  }, [])
+    getOrderId()
+    updateOrder()
+  }, [selectedOption])
 
   useEffect(() => {
     setTimeout(() => {
@@ -141,7 +134,7 @@ export default function Cart() {
   }, [orderPlaced])
 
   return (
-    <aside className="fixed top-0 right-0 w-[280px] h-screen bg-white border-l-[1px] border-l-linear px-5 py-6">
+    <aside className="fixed top-0 right-0 w-[280px] h-screen bg-white border-l-[1px] border-l-linear px-5 py-6 overflow-y-scroll hidden-scrollbar">
       {cart === null || cart.length === 0 ? (
         orderPlaced ? (
           <SuccessfulOrderPlacement orderId={orderId} />
@@ -174,7 +167,6 @@ export default function Cart() {
           <MainButton onClick={placeOrder} cssSet="cartSet">
             Place an order
           </MainButton>
-          {/* <QRCode value="https://pos-project-phi.vercel.app/sign-in" /> */}
         </Flex>
       )}
     </aside>

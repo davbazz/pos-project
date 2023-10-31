@@ -7,12 +7,12 @@ export default function SuccessfulOrderPlacement({
 }: {
   orderId: number | null
 }) {
+  const id = orderId! - 1
+
   return (
     <Flex className="justify-center flex-col items-center gap-1 h-full">
       <SuccessIcon />
-      <SubText className="text-succsess">
-        #{orderId} Order Successfully Placed
-      </SubText>
+      <SubText>#{id} Order Successfully Placed</SubText>
     </Flex>
   )
 }

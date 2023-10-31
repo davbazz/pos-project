@@ -93,22 +93,6 @@ export default function MenuProductWorkshop() {
     }
   }
 
-  // set product workshop to zero value
-  // const setProductWorkshopToZeroValue = async () => {
-  //   const newProd = {
-  //     product_name: '',
-  //     category_name: category,
-  //     user_id: (await supabase.auth.getUser()).data.user?.id,
-  //     description: '',
-  //     price: [0],
-  //     size: [''],
-  //     img_url: '',
-  //     ingredients: '',
-  //     available: true,
-  //   }
-  //   setProductWorkshop(newProd)
-  // }
-
   // check on which function to fire (create or update) based on existense of product ID
   const checkProductID = () => {
     if (productWorkshop?.id) {

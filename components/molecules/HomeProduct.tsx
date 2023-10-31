@@ -80,7 +80,7 @@ export default function HomeProduct({
             <MiniHeader font="normal" color="secondary">
               Size:
             </MiniHeader>
-            <Flex className="justify-start items-center gap-1 overflow-x-scroll hidden-scrollbar text-secondary text-sm -mb-4">
+            <Flex className="justify-start items-center gap-1 overflow-x-scroll hidden-scrollbar text-secondary text-sm -mb-4 whitespace-nowrap">
               {size.map((s, i) => (
                 <AltButton
                   key={i}

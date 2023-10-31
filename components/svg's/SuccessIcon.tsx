@@ -6,7 +6,7 @@ export default function SuccessIcon() {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 125"
-        className="w-full h-full fill-succsess"
+        className="w-full h-full fill-success"
       >
         <g>
           <g transform="translate(-141.000000, -183.000000)">

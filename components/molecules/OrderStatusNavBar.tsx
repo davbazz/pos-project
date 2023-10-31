@@ -13,7 +13,7 @@ export default function OrderStatusNavBar({
   const statuses = [null, 'pending', 'settled', 'cancelled']
 
   return (
-    <Flex className="gap-5">
+    <Flex className="gap-6">
       {statuses.map((status: any) => (
         <h3
           onClick={() => setSelectedStatus(status)}
