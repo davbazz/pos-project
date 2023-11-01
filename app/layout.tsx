@@ -1,4 +1,5 @@
 import './globals.css'
+import { Analytics } from '@vercel/analytics/react'
 import { Open_Sans } from 'next/font/google'
 import type { Metadata } from 'next'
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         <aside className="lg:hidden">
           This screen resolution is not supported, please use larger device
         </aside>
+        <Analytics />
       </body>
     </html>
   )
