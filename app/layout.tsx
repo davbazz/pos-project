@@ -1,6 +1,7 @@
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { Open_Sans } from 'next/font/google'
+import NotSupportedMessage from '@/components/molecules/NotSupportedMessage'
 import type { Metadata } from 'next'
 
 const font = Open_Sans({ subsets: ['latin'] })
@@ -19,9 +20,7 @@ export default function RootLayout({
     <html lang="en" className={font.className}>
       <body>
         <main className="hidden lg:block">{children}</main>
-        <aside className="lg:hidden">
-          This screen resolution is not supported, please use larger device
-        </aside>
+        <NotSupportedMessage />
         <Analytics />
       </body>
     </html>
